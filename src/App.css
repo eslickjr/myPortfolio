@@ -1,0 +1,127 @@
+:root {
+    --main-bg-color: #DCE0D9;
+    --main-text-color: #31081F;
+    --main-accent-color: #6B0F1A;
+    --main-third-color: #595959;
+    --main-secondary-color: #808F85;
+
+    background-color: var(--main-bg-color);
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--main-bg-color);
+}
+
+a {
+    margin: auto 10px;
+    color: var(--main-text-color);
+}  
+
+#theHead {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    border-bottom: var(--main-accent-color) 1px solid;
+    background-color: var(--main-third-color);
+}
+
+#theNav {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0;
+}
+
+#theNav ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+} 
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#theHead h1 {
+    margin-left: 10px;
+    color: var(--main-text-color);
+}
+
+#theFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-top: gray 1px solid;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: var(--main-third-color);
+    border-top: var(--main-accent-color) 1px solid;
+}
+
+.projectList {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#aboutParagraph {
+    margin: 0 20% 20px 20%;
+}
+
+#contactForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#contact h1 {
+    margin-left: 10px;
+}
+
+#contactForm div {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+#messageLabel, #emailLabel, #nameLabel {
+    margin-right: 10px;
+}
+
+#contactSubmit {
+    width: 75px;
+    margin: 10px 10px 10px 50px;
+}
+
+#resume {
+    margin-left: 5%;
+}
+
+.resumeList {
+    margin-left: 5%;
+}
+
+.backEndList, .frontEndList {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20% 20px 20%;
+    list-style-type: disc;
+}
+
+.backEndList li, .frontEndList li {
+    margin: 10px;
+}
+
+#portfolio_header {
+    color: var(--main-text-color);
+}
+
+#contactSubmit {
+    background-color: var(--main-secondary-color);
+    border: var(--main-accent-color) 1px solid;
+    color: var(--main-text-color);
+}
