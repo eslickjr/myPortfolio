@@ -8,6 +8,10 @@
     background-color: var(--main-bg-color);
 }
 
+ul {
+    padding-inline-start: 0;
+}
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -47,7 +51,7 @@ a {
 }
 
 #theHead h1 {
-    margin-left: 10px;
+    margin-left: 5px;
     color: var(--main-text-color);
 }
 
