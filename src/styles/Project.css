@@ -1,0 +1,117 @@
+.project {
+    position: relative;
+    flex: 0 0 auto;
+    min-width: 150px;
+    height: 200px;
+    width: 250px;
+    margin: -40px;
+    border-radius: 10px;
+    color: var(--main-text-color);
+    transform: rotate(10deg);
+    transition: box-shadow .3s ease,
+        margin-left .3s ease,
+        margin-right .3s ease,
+        width .3s ease,
+        height .3s ease;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+}
+
+.project::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 00);
+    z-index: 2;
+    transition: all .3s ease;
+}
+
+.cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.focus:hover {
+    box-shadow: 0 10px 15px 5px rgba(255, 255, 255, 0.8);
+    margin-left: -105px;
+    margin-right: -105px;
+    width: 500px;
+    height: 400px;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.project::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 10%;
+    box-shadow: 0 80px 30px rgba(0, 0, 0, .5);
+}
+
+.projectImg {
+    height: 100%;
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.projectHeaderContainer {
+    align-items: center;
+    /*background-color: rgba(0, 0, 0, 0.2);*/
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: background-color .3s ease;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+}
+
+.project:hover .projectHeaderContainer {
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+
+.projectHeader {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 2px 4px #00000080;
+    transition: text-shadow .3s ease;
+}
+
+.focus:hover .projectHeader {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 1);
+}
+
+.project p {
+    position: absolute;
+    left: 0;
+    bottom: 40px;
+    width: 130px;
+    height: 100px;
+    margin: 5px 10px 10px 10px;
+    color: var(--main-text-color);
+}

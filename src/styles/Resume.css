@@ -1,0 +1,91 @@
+#resume {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.skillsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#otherContainer {
+    margin-bottom: 120px;
+}
+
+.skillsHeader {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 60px;
+    font-family: var(--header-font), sans-serif;
+    font-size: 3rem;
+    color: var(--main-text-secondary-color);
+}
+
+.skillsHeader::before {
+    position: absolute;
+    content: '';
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
+}
+
+#backendHeader {
+    margin-top: 120px;
+}
+
+.skillsList {
+    display: flex;
+    flex-direction: row;
+    /* list-style-type: none; */
+    margin:  20px auto;
+}
+
+.skillItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .5), 0 3px 10px rgba(0, 0, 0, .5);
+    padding: 20px;
+    margin: 0 10px;
+    flex: 1; /* Ensures all items grow/shrink equally */
+    transition: all 0.3s ease;
+    /* max-width: 200px; Optional: Set a max width to prevent excessive stretching */
+}
+
+.skillItem:hover {
+    transform: scale(1.1);
+}
+
+.skillHeader {
+    color: var(--main-text-color);
+    font-family: var(--header-font), "Roboto", sans-serif;
+    /*font-family: "Encode Sans Semi Condensed", "Roboto", sans-serif;*/
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.skillBody {
+    color: var(--main-third-color);
+    text-align: justify;
+    font-family: var(--body-font), "Roboto", sans-serif;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.skillIcon {
+    width: 64px;
+    height: 64px;
+    fill: var(--main-text-secondary-color);
+    filter: drop-shadow(0 0 1px #000);
+}
