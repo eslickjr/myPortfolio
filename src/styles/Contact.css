@@ -32,14 +32,14 @@
 #profileImage {
     width: 200px;
     height: 200px;
-    object-fit: cover;
-    object-position: center top;
-    clip-path: circle(35% at center 40%);
+    clip-path: circle(35% at center 35%);
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -40%);
     overflow: hidden;
+    background: url("../assets/Me.jpg") no-repeat center top;
+    background-size: cover;
 }
 
 #generalHeader {
