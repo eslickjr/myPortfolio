@@ -8,7 +8,6 @@ export default function Header() {
 
   useEffect(() => {
     const head = document.getElementById('theHead');
-    const links = document.querySelectorAll('.nav-link');
 
     const handleScroll = () => {
       if (window.scrollY <= 60) {
