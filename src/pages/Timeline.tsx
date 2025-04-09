@@ -3,73 +3,127 @@ import "../styles/Timeline.css";
 import { useState, useEffect, useRef } from "react";
 
 const Timeline = () => {
+    // Filter state for business timeline events
     const [businessFilter, setBusinessFilter] = useState(true);
+    // Filter reference for business timeline events
     const businessRef = useRef<boolean>(true);
+    // Filter state for family timeline events
     const [familyFilter, setFamilyFilter] = useState(false);
+    // Filter reference for family timeline events
     const familyRef = useRef<boolean>(false);
+    // Filter state for education timeline events
     const [educationFilter, setEducationFilter] = useState(true);
+    // Filter reference for education timeline events
     const educationRef = useRef<boolean>(true);
+    // State to track if the timeline elements are in view
     const [inView, setInView] = useState<boolean[]>([]);
+    // Reference to track the timeline elements
     const viewRef = useRef<any[]>([]);
+    // State to track whether elements on the page have mounted
     const [loaded, setLoaded] = useState(false);
 
+    // Effect to handle the intersection observer for the timeline events
     useEffect(() => {
+        // Get all timeline event container elements
         const timelineEvents = document.querySelectorAll(".timelineEventContainer");
+
+        // Set a timeout to update the loaded state after a short delay of 10ms
+        // This is a workaround for the issue where the elements are not in view when the component mounts
         const timeout = setTimeout(() => {
+            // Set the loaded state to true
             setLoaded(true);
         }, 10);
 
+        // Initialize the inView state to an array of false values based on the number of timeline events
+        // This is done to ensure that the inView state is updated correctly when the component mounts
         setInView(new Array(timelineEvents.length).fill(false));
 
+        // Create a new IntersectionObserver instance
+        // This observer will be used to track when the timeline events come into view
         const observer = new IntersectionObserver(
+            // This callback function is called when the observer detects that an element is in view
+            // It takes an array of IntersectionObserverEntry objects as its argument
             (entries) => {
+                // Loop through each entry in the entries array
                 entries.forEach((entry) => {
+                    // This checks if the element is intersecting with the page
                     if (entry.isIntersecting) {
+                        // If the element is in view, we loop through the viewRef array to find the index of the element that is in view
                         viewRef.current.forEach((element, index) => {
+                            // Compare the element in the viewRef array with the entry target
                             if (element === entry.target) {
+                                // If they match, we update the inView state to set the corresponding index to true
+                                // This will trigger a re-render of the component and update the class of the element to "inView"
                                 setInView((prev) => {
+                                    // Create a new array based on the previous state
                                     const newInView = [...prev];
+                                    // Update the index of the element that is in view to true
                                     newInView[index] = true;
+                                    // Return the new array
                                     return newInView;
                                 });
                             }
                         });
+                        // Unobserve the entry target to stop observing it
                         observer.unobserve(entry.target);
                     }
                 });
             },
-            { threshold: 0.5 }
+            // This sets the threshold of how much of the object needs to be seen before it is considered in view
+            { threshold: 0.1 }
         );
 
+        // Loop through each timeline event element and observe it with the observer
         timelineEvents.forEach((element) => {
+            // Set the view reference to the element to match when looping through the observer entries
             viewRef.current.push(element);
+            // Observe the element with the observer
             observer.observe(element);
         });
 
-
+        // Cleanup function to unobserve the elements and clear the timeout
         return () => {
+            // Unobserve all the timeline event elements
             timelineEvents.forEach((element) => {
+                // Unobserve the element with the observer
                 observer.unobserve(element);
             });
+            // Clear the view reference to reset it
             viewRef.current = [];
+            // Clear the timeout to prevent memory leaks
             clearTimeout(timeout);
+            // Set the loaded state to false to reset it
             setLoaded(false);
         }
+        // Rerun the effect when the filters change
     }, [familyFilter, businessFilter, educationFilter]);
 
+    // Function to handle the checkbox change event
     const handleCheckboxChange = (filterName: string) => {
+        // Get the checkbox element by its ID
         const checkbox = document.getElementById(filterName) as HTMLInputElement;
+
+        // Check if the checkbox element exists
         if (checkbox) {
+            // Check if the filter being changed is business
             if (filterName === "businessFilter") {
+                // Set the business filter reference to the opposite of its current value
                 businessRef.current = !businessRef.current;
+                // Update the business filter state to match the reference
                 setBusinessFilter(businessRef.current);
             }
+            // Check if the filter being changed is family
             if (filterName === "familyFilter") {
+                // Set the family filter reference to the opposite of its current value
                 familyRef.current = !familyRef.current;
+                // Update the family filter state to match the reference
                 setFamilyFilter(familyRef.current);
             }
+            // Check if the filter being changed is education
             if (filterName === "educationFilter") {
+                // Set the education filter reference to the opposite of its current value
                 educationRef.current = !educationRef.current;
+                // Update the education filter state to match the reference
                 setEducationFilter(educationRef.current);
             }
         }

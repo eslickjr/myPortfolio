@@ -281,7 +281,7 @@ body {
 .timelineEvent {
     position: relative;
     display: flex;
-    width: 36%;
+    width: calc(36% - 38px);
     flex-direction: column;
     justify-content: left;
     align-items: center;
@@ -319,7 +319,7 @@ body {
 
 .arrow {
     position: absolute;
-    top: 14%;
+    top: 38px;
     transform: translate(0%, -50%);
     width: 0;
     height: 0;
@@ -397,7 +397,7 @@ body {
     top: 13%; */
     font-weight: bold;
     color: var(--main-text-secondary-color);
-    width: 40%;
+    width: calc(40% - 38px);
     margin-top: 35px;
     opacity: 0;
     transition: opacity .6s ease;
