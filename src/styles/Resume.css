@@ -42,8 +42,11 @@
 .skillsList {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     /* list-style-type: none; */
+    justify-content: center;
     margin:  20px auto;
+    width: 100%;
 }
 
 .skillItem {
@@ -55,10 +58,10 @@
     border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .5), 0 3px 10px rgba(0, 0, 0, .5);
     padding: 20px;
-    margin: 0 10px;
-    flex: 1; /* Ensures all items grow/shrink equally */
+    margin: 10px 10px;
+    flex: 0 1 150px; /* Allows items to grow/shrink evenly and wrap */
+    box-sizing: border-box; /* Ensures padding/margin are included in size calculations */
     transition: all 0.3s ease;
-    /* max-width: 200px; Optional: Set a max width to prevent excessive stretching */
 }
 
 .skillItem:hover {

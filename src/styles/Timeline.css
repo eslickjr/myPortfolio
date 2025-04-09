@@ -11,6 +11,49 @@ body {
     background: linear-gradient(to right, var(--main-third-color) 20%, var(--main-secondary-color), var(--main-third-color) 80%);
 }
 
+@keyframes bounceA {
+    0% {
+        transform: translateX(-200%);
+        opacity: 0;
+    }
+    60% {
+        transform: translateX(5%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounceB {
+    0% {
+        transform: translateX(200%);
+        opacity: 0;
+    }
+    70% {
+        transform: translateX(-5%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounceC {
+    0% {
+        transform-origin: center;
+        transform: translate(-45% , 0%) scale(0.1);
+        opacity: 0;
+    }
+    70% {
+        transform: translate(-45% , 0%) scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-45%, 0%) scale(1);
+    }
+}
+
 .icons {
     width: 32px;
     height: 32px;
@@ -28,24 +71,13 @@ body {
     height: 68px;
 }
 
-#timelineTitle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#timelineHeader {
     margin-top: 120px;
     position: relative;
-    color: var(--main-text-color);
-    font-size: 2.5em;
-    padding: 10px 10px 8px 10px;
-    font-family: var(--header-font), "Roboto", sans-serif;
-    text-decoration: underline;
-    font-weight: 500;
-    font-size: 3rem;
-    text-align: center;
     background: linear-gradient(to right, transparent 30%, var(--main-bg-color), transparent 70%);
 }
 
-#timelineTitle::before {
+#timelineHeader::before {
     position: absolute;
     content: '';
     top: 0;
@@ -55,7 +87,7 @@ body {
     background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
 }
 
-#timelineTitle::after {
+#timelineHeader::after {
     position: absolute;
     content: '';
     top: calc(100% - 3px);
@@ -64,6 +96,58 @@ body {
     height: 3px;
     background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
 }
+
+#timelineTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: var(--main-text-color);
+    font-size: 2.5em;
+    padding: 10px 10px 8px 10px;
+    font-family: var(--header-font), "Roboto", sans-serif;
+    text-decoration: underline;
+    font-weight: 500;
+    font-size: 3rem;
+    text-align: center;
+}
+
+#timelineTitle.notLoaded {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#timelineTitle.loaded {
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+#timelineTitle.notLoaded div:first-child {
+    transform: translateX(-300%)
+        rotateZ(-360deg);
+    transition: transform 2s ease;
+}
+
+#timelineTitle.notLoaded div:last-child {
+    transform: translateX(300%)
+        rotateZ(360deg)
+        scaleX(-1);
+    transition: transform 2s ease;
+}
+
+#timelineTitle.loaded div:first-child {
+    transform: translateX(0%)
+        rotateZ(0deg);
+    transition: transform 2s ease;
+}
+
+#timelineTitle.loaded div:last-child {
+    transform: translateX(0%)
+        rotateZ(0deg)
+        scaleX(-1);
+    transition: transform 2s ease;
+}
+
 
 #timelineContainer {
     position: relative;
@@ -90,7 +174,8 @@ body {
     right: 40px;
     display: flex;
     flex-direction: row;
-    transform: translate(0, -50%);
+    transform: translate(0, -50%),
+        scale(1);
     justify-content: right;
     width: 100%;
 }
@@ -141,10 +226,9 @@ body {
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 20px;
+    justify-content: space-around;
+    width: calc(80% - 40px);
+    margin: 20px auto;
 }
 
 .timelineIcon {
@@ -156,8 +240,16 @@ body {
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translate(-72%, 0%);
+    transform: translate(-45%, 0%);
     z-index: 2;
+}
+
+.timelineIcon.outView {
+    opacity: 0;
+}
+
+.timelineIcon.inView {
+    animation: bounceC 0.6s ease;
 }
 
 .timelineIcon svg {
@@ -182,10 +274,14 @@ body {
     background-color: rgb(173, 79, 95);
 }
 
+#timelineContainer :nth-child(even) {
+    flex-direction: row-reverse;
+}
+
 .timelineEvent {
     position: relative;
     display: flex;
-    width: 30%;
+    width: 36%;
     flex-direction: column;
     justify-content: left;
     align-items: center;
@@ -196,21 +292,34 @@ body {
     z-index: 1;
 }
 
+.timelineEvent.outView {
+    opacity: 0;
+}
+
+.timelineEvent:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .5), 0 6px 20px rgba(0, 0, 0, .5);
+    transform: scale(1.05);
+    transform-origin: center;
+    /* padding: 40px;
+    margin: -20px; */
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
 #timelineContainer :first-child .timelineEvent {
     background-color: lightblue;
 }
 
-#timelineContainer :nth-child(odd) .timelineEvent {
-    transform: translate(-70%, 0%);
+#timelineContainer :nth-child(odd) .timelineEvent.inView {
+    animation: bounceA 0.6s ease;
 }
 
-#timelineContainer :nth-child(even) .timelineEvent {
-    transform: translate(70%, 0%);
+#timelineContainer :nth-child(even) .timelineEvent.inView {
+    animation: bounceB 0.6s ease;
 }
 
 .arrow {
     position: absolute;
-    top: 15%;
+    top: 14%;
     transform: translate(0%, -50%);
     width: 0;
     height: 0;
@@ -284,19 +393,25 @@ body {
 }
 
 .date {
-    position: absolute;
-    top: 13%;
+    /* position: absolute;
+    top: 13%; */
     font-weight: bold;
     color: var(--main-text-secondary-color);
-    width: 100%;
+    width: 40%;
+    margin-top: 35px;
+    opacity: 0;
+    transition: opacity .6s ease;
 }
 
-#timelineContainer :nth-child(odd) .timelineEvent .date {
-    left: 130%;
+.date.inView {
+    opacity: 1;
 }
 
-#timelineContainer :nth-child(even) .timelineEvent .date {
-    right: 138%;
+#timelineContainer :nth-child(odd) .date {
+    text-align: left;
+}
+
+#timelineContainer :nth-child(even) .date {
     text-align: right;
 }
 
@@ -313,9 +428,9 @@ body {
     font-family: var(--body-font), "Roboto", sans-serif;
     font-weight: 700;
     margin-top: 5px;
+    margin-bottom: 24px;
     color: var(--main-text-color);
     font-size: 1.5rem;
-    font-weight: 700;
 }
 
 .tools{
