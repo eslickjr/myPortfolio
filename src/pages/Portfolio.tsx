@@ -21,7 +21,7 @@ interface ProjectProps {
   styleProps: StyleProps;
   image: string;
   name: string;
-  url?: string;
+  url: string;
   description?: string;
 }
 

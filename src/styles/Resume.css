@@ -1,3 +1,14 @@
+@keyframes skillItem {
+    0% {
+        opacity: 0;
+        transform: scale(1) translateY(-200px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
 #resume {
     display: flex;
     flex-direction: column;
@@ -23,6 +34,12 @@
     font-family: var(--header-font), sans-serif;
     font-size: 3rem;
     color: var(--main-text-secondary-color);
+    opacity: 0;
+}
+
+.skillsHeader.fadeIn {
+    opacity: 1;
+    transition: opacity 2s ease-in;
 }
 
 .skillsHeader::before {
@@ -61,11 +78,19 @@
     margin: 10px 10px;
     flex: 0 1 150px; /* Allows items to grow/shrink evenly and wrap */
     box-sizing: border-box; /* Ensures padding/margin are included in size calculations */
-    transition: all 0.3s ease;
+    opacity: 0;
+    transform: scale(1) translateY(-200px);
+}
+
+.skillItem.fadeIn {
+    transition: transform 1s ease, opacity 1s ease;
+    opacity: 1;
+    transform: scale(1) translateY(0);
 }
 
 .skillItem:hover {
-    transform: scale(1.1);
+    transition: transform 0.3s ease;
+    transform: scale(1.1) translateY(0);
 }
 
 .skillHeader {

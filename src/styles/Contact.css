@@ -1,3 +1,50 @@
+@keyframes pourTea {
+    0% {
+        transform: rotate(0deg)
+            scale(1);
+            filter: none;
+    }
+    30% {
+        transform: rotate(-45deg)
+            scale(1.5);
+        filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+    }
+    50% {
+        transform: rotate(-30deg)
+            scale(1.5);
+        filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+    }
+    70% {
+        transform: rotate(-45deg)
+            scale(1.5);
+        filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+    }
+    100% {
+        transform: rotate(0deg)
+            scale(1);
+            filter: none;
+    }
+}
+
+@keyframes teaTime {
+    0% {
+        transform: rotate(-45deg) translate(-20px, -20px);
+        opacity: 0;
+    }
+    20% {
+        transform: rotate(-45deg) translate(0px, -20px);
+        opacity: 1;
+    }
+    80% {
+        transform: rotate(-45deg) translate(60px, -20px);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(-45deg) translate(80px, -20px);
+        opacity: 0;
+    }
+}
+
 #contact {
     display: flex;
     flex-direction: column;
@@ -181,8 +228,34 @@
     margin-bottom: 0;
 }
 
+#teaContainer {
+    position: relative;
+}
+
 #teaIcon {
     width: 100px;
     height: 100px;
     margin-top: 6px;
+    margin-bottom: 120px;
+    transform: scale(1) rotate(0deg);
+}
+
+#teaIcon:hover {
+    animation: pourTea 3s ease-in-out forwards;
+}
+
+#teaTime {
+    position: absolute;
+    color: yellow;
+    width: 100px;
+    height: 100px;
+    top: 0;
+    left: 100%;
+    transform: rotate(-45deg) translate(-20px, -20px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.teaTime {
+    animation: teaTime 3s linear forwards;
 }

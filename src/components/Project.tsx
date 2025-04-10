@@ -17,14 +17,14 @@ interface ProjectProps {
   projectKey: number;
   image: string;
   name: string;
-  url?: string;
+  url: string;
   description?: string;
   scrollRef: boolean;
   focus: string;
   dragging: string;
 }
 
-export default function Project({ projectKey, image, name, styleProps, scrollRef, focus, dragging }: ProjectProps) {
+export default function Project({ projectKey, image, name, styleProps, scrollRef, focus, dragging, url }: ProjectProps) {
   const [hover, setHover] = useState('');
   
 
@@ -62,6 +62,12 @@ export default function Project({ projectKey, image, name, styleProps, scrollRef
     };
   }, [focus, scrollRef]);
 
+  const viewProject = (url: string) => {
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
+
   return (
     <div style={{
       position: "relative",
@@ -69,7 +75,7 @@ export default function Project({ projectKey, image, name, styleProps, scrollRef
       marginRight: (hover === 'focus' ? (projectKey === 0 ? "-210px" : "-105px") : styleProps.marginRight), 
       transform: `rotate3d(${styleProps.xRotation}, ${styleProps.yRotation}, ${styleProps.zRotation}, ${styleProps.degree}deg)`, 
       zIndex: (hover === 'focus' ? 100 : styleProps.z)
-    }} id={`${projectKey}${name}`} className={`project ${styleProps.opacity} ${hover}`}>
+    }} id={`${projectKey}${name}`} className={`project ${styleProps.opacity} ${hover}`} onClick={() => { if (hover) viewProject(url); }}>
       <img className="projectImg" src={image} alt={name} />
       <div className="projectHeaderContainer">
       <div className="projectHeader">{name}</div>
