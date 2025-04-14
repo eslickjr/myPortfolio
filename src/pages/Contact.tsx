@@ -1,10 +1,11 @@
 import "../styles/Contact.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 export default function Contact() {
   const [teaTime, setTeaTime] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const teaAnimation = () => {
     setTeaTime(true);
@@ -13,11 +14,22 @@ export default function Contact() {
     }, 3000);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 10);
+
+    return () => {
+      setLoaded(false);
+    };
+  }
+  , []);
+
   console.log("teaTime: ", teaTime);
 
   return (
     <section id="contact">
-      <div id="generalInfoContainer">
+      <div id="generalInfoContainer" className={loaded ? "fadeIn" : ""}>
         <div id="profileImageContainer">
           <div id="profileImage"></div>
         </div>

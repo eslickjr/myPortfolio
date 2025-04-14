@@ -18,14 +18,14 @@ const Timeline = () => {
     // State to track if the timeline elements are in view
     const [inView, setInView] = useState<boolean[]>([]);
     // Reference to track the timeline elements
-    const viewRef = useRef<any[]>([]);
+    const viewRef = useRef<HTMLDivElement[]>([]);
     // State to track whether elements on the page have mounted
     const [loaded, setLoaded] = useState(false);
 
     // Effect to handle the intersection observer for the timeline events
     useEffect(() => {
         // Get all timeline event container elements
-        const timelineEvents = document.querySelectorAll(".timelineEventContainer");
+        const timelineEvents = document.querySelectorAll(".timelineEventContainer") as NodeListOf<HTMLDivElement>;
 
         // Set a timeout to update the loaded state after a short delay of 10ms
         // This is a workaround for the issue where the elements are not in view when the component mounts
