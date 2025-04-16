@@ -53,18 +53,29 @@
     margin-bottom: 20px;
 }
 
-.about h1 {
+#aboutMeTitleContainer {
     position: relative;
-    text-align: center;
-    font-family: var(--header-font), "Roboto", sans-serif;
-    padding: 10px;
-    font-size: 2.5em;
-    color: var(--main-text-color);
     width: 100%;
     background: linear-gradient(to right, transparent 30%, var(--main-bg-color), transparent 70%);
 }
 
-.about h1::before {
+#aboutMeTitle {
+    position: relative;
+    text-align: center;
+    font-family: var(--header-font), "Roboto", sans-serif;
+    font-size: 2.5em;
+    color: var(--main-text-color);
+    width: 100%;
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+#aboutMeTitle.fadeIn {
+    opacity: 1;
+    transition: opacity 2s ease;
+}
+
+#aboutMeTitleContainer::before {
     position: absolute;
     content: '';
     top: 0;
@@ -74,7 +85,7 @@
     background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
 }
 
-.about h1::after {
+#aboutMeTitleContainer::after {
     position: absolute;
     content: '';
     top: calc(100% - 3px);
@@ -97,40 +108,61 @@
     border-radius: 30px;
 }
 
-.lifeParagraph {
+.lifePWrapper {
+    position: relative;
     width: calc(45% - 40px);
     height: auto;
-    padding: 20px;
-    font-size: 1.2em;
-    color: var(--main-text-color);
-    font-family: var(--body-font), "Roboto", sans-serif;
-    background-color: var(--main-bg-color);
-    box-shadow: 0 1px 3px rgba(221, 90, 90, 0.5), 0 3px 10px rgba(0, 0, 0, .5), inset 0 0 20px rgba(0, 0, 0, .5);
     border-radius: 10px;
-    line-height: 1.5;
+    transition: transform 0.3s ease;
     margin: 0 auto;
 }
 
-.about :nth-child(odd) .lifeParagraph {
+.lifePContainer {
+    width: calc(100% - 40px);
+    height: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--main-bg-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 3px 10px rgba(0, 0, 0, .5), inset 0 0 20px rgba(0, 0, 0, .5);
+    transition: box-shadow 0.3s ease;
+}
+
+.lifeParagraph {
+    font-size: 1.2em;
+    color: var(--main-text-color);
+    font-family: var(--body-font), "Roboto", sans-serif;
+    line-height: 1.5;
+    transition: transform 0.3s ease;
+    pointer-events: none;
+}
+
+.about :nth-child(odd) .lifePWrapper .lifePContainer {
     transform: translateX(200%);
 }
 
-.about :nth-child(even) .lifeParagraph {
+.about :nth-child(even) .lifePWrapper .lifePContainer {
     transform: translateX(-200%);
 }
 
-.about :nth-child(even) .lifeParagraph.inView {
+.about :nth-child(even) .lifePWrapper .lifePContainer.inView {
     animation: paragraphBounceA 1s ease forwards;
 }
 
-.about :nth-child(odd) .lifeParagraph.inView {
+.about :nth-child(odd) .lifePWrapper .lifePContainer.inView {
     animation: paragraphBounceB 1s ease forwards;
 }
 
-.lifeParagraph.outView {
+.lifePContainer.outView {
     transform: translateX(0);
 }
 
+.lifePWrapper:has(.lifePContainer:hover) {
+    transform: scale(1.05);
+}
+
+.lifePContainer:hover {
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5), 0 3px 20px rgba(0, 0, 0, .8), inset 0 0 20px rgba(0, 0, 0, .5);
+}
 
 .lifeImageContainer {
     margin: auto auto;
@@ -147,8 +179,10 @@
 .lifeImageContainer.inView {
     animation: imagePop 1s ease forwards;
 }
-.lifeImageContainer.outView {
-    transform: scale(1);
+
+.lifeImageContainer:has(.lifeImage:hover) {
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
 }
 
 .lifeImage {
@@ -157,6 +191,12 @@
     max-height: 100%;
     aspect-ratio: 1/1;
     clip-path: circle(50% at center 50%);
+    transition: all 0.3s ease;
+}
+
+.lifeImage:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
 }
 
 #earlyLifeImage {

@@ -1,6 +1,24 @@
+@keyframes portBounce {
+    0% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(100px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
 .aboutMe {
     margin-bottom: 80px;
     background: linear-gradient(to right, var(--main-bg-color) 30%, transparent 90%);
+    transform: translateX(-100%);
+}
+
+.aboutMe.fadeIn {
+    transform: translateX(0);
+    transition: transform .5s ease;
 }
 
 .aboutMe::before {
@@ -10,7 +28,6 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: linear-gradient(to right, var(--main-accent-color) 30%, transparent 90%);
 }
 
 .aboutMe::after {
@@ -20,12 +37,60 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: linear-gradient(to right, var(--main-accent-color) 30%, transparent 90%);
 }
 
 .aboutMeContainer {
-    width: 50%;
+    width: 60%;
     margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    transform: translateX(0);
+}
+
+@media screen and (min-width: 769px) {
+    .aboutMeContainer.fadeIn {
+        animation: portBounce .6s ease;
+    }
+
+    .aboutMe::before, .aboutMe::after {
+        background: linear-gradient(to right, var(--main-accent-color) 30%, transparent 90%);
+    }
+}
+
+#portImageContainer {
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 45%;
+    /* filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .5), 0 3px 10px rgba(0, 0, 0, .5)); */
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
+    transition: all 0.3s ease;
+    margin: 0 40px 0 0;
+}
+
+#portImage {
+    height: 200px;
+    width: auto;
+    max-height: 100%;
+    aspect-ratio: 1/1;
+    clip-path: circle(50% at center 50%);
+    background: url(../assets/family%203.png) no-repeat center center;
+    background-size: cover;
+    transition: all 0.3s ease;
+}
+
+#portImage:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+#portImageContainer:has(#portImage:hover) {
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1)) drop-shadow(0 0 10px rgba(196, 196, 255, 1));
+    transition: all 0.3s ease;
 }
 
 #aboutMeH1 {
@@ -33,7 +98,7 @@
     font-family: var(--header-font), "Roboto", sans-serif;
     /*font-family: "Encode Sans Semi Condensed", "Roboto", sans-serif;*/
     font-weight: 500;
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 0;
 }
 
@@ -41,7 +106,7 @@
     color: var(--main-third-color);
     text-align: justify;
     font-family: var(--body-font), "Roboto", sans-serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 1.5;
 }
 
@@ -58,7 +123,7 @@
     transition: all 0.3s ease;
     text-decoration: none;
     font-family: var(--button-font), sans-serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
     letter-spacing: 0.05em;
     margin: 0 10px;
     /* border: 1px solid var(--main-secondary-color); */
@@ -111,6 +176,14 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 
+#portfolioProjects {
+    background-color: var(--main-bg-color);
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
 #projectList {
     position: relative;
     display: flex;
@@ -137,6 +210,11 @@
     padding-top: 120px;
 }
 
+#portfolioHeaderContainer {
+    position: relative;
+    background: linear-gradient(to right, transparent 30%, var(--main-bg-color), transparent 70%);
+}
+
 #portfolioHeader {
     position: relative;
     color: var(--main-text-color);
@@ -146,10 +224,16 @@
     font-weight: 500;
     font-size: 3rem;
     text-align: center;
-    background: linear-gradient(to right, transparent 30%, var(--main-bg-color), transparent 70%);
+    opacity: 0;
+    transition: opacity 2s ease;
 }
 
-#portfolioHeader::before {
+#portfolioHeader.fadeIn {
+    opacity: 1;
+    transition: opacity 2s ease;
+}
+
+#portfolioHeaderContainer::before {
     position: absolute;
     content: '';
     top: 0;
@@ -159,7 +243,7 @@
     background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
 }
 
-#portfolioHeader::after {
+#portfolioHeaderContainer::after {
     position: absolute;
     content: '';
     top: calc(100% - 3px);
@@ -167,14 +251,6 @@
     width: 100%;
     height: 3px;
     background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
-}
-
-#portfolioProjects {
-    background-color: var(--main-bg-color);
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
 }
 
 @keyframes backgroundGlow {
@@ -238,4 +314,50 @@
     background-color: var(--main-secondary-color);
     border: var(--main-accent-color) 1px solid;
     color: var(--main-text-color);
+}
+
+@media screen and (max-width: 768px) {
+    .aboutMe {
+        background: var(--main-bg-color);
+    }
+
+    .aboutMe::before, .aboutMe::after {
+        background: var(--main-accent-color);
+    }
+
+    .aboutMeContainer {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+
+    #portImageContainer {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #aboutMeH1 {
+        text-align: center;
+    }
+
+    #aboutMeP {
+        text-align: justify;
+        padding: 0 20px;
+    }
+
+    .infoLinks {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #portfolioHeaderContainer {
+        background: linear-gradient(to right, transparent 5%, var(--main-bg-color), transparent 95%);
+    }
+
+    #portfolioHeaderContainer::before, #portfolioHeaderContainer::after {
+        background: linear-gradient(to right, transparent 5%, var(--main-accent-color), transparent 95%);
+    }
 }

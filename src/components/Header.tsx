@@ -1,10 +1,12 @@
 import Navigation from './Navigation';
 
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import '../styles/Header.css';
 
 export default function Header() {
+  const navigate = useNavigate();
 
   useEffect(() => {
     const head = document.getElementById('theHead');
@@ -30,9 +32,13 @@ export default function Header() {
     };
   }, []);
 
+  const handleClick = () => {
+    navigate('/');
+  }
+
   return (
     <header id="theHead">
-      <h1>Joshua Eslick</h1>
+      <h1 onClick={handleClick}>Joshua Eslick</h1>
       <Navigation />
     </header>
   );

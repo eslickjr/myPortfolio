@@ -79,4 +79,32 @@
     font-family: var(--nav-header-font), 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 2.5rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    #theHead {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #theHead h1 {
+        margin-bottom: 0;
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: top;
+        align-items: top;
+    }
+
+    .nav-link {
+        padding-bottom: 5px;
+    }
+
+    .nav-link::after {
+        bottom: 3px;
+    }
 }

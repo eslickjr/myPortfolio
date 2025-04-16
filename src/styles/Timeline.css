@@ -30,7 +30,7 @@ body {
         transform: translateX(200%);
         opacity: 0;
     }
-    70% {
+    60% {
         transform: translateX(-5%);
         opacity: 1;
     }
@@ -45,12 +45,27 @@ body {
         transform: translate(-45% , 0%) scale(0.1);
         opacity: 0;
     }
-    70% {
+    60% {
         transform: translate(-45% , 0%) scale(1.2);
         opacity: 1;
     }
     100% {
         transform: translate(-45%, 0%) scale(1);
+    }
+}
+
+@keyframes bounceCSmall {
+    0% {
+        transform-origin: center;
+        transform: scale(0.1);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
     }
 }
 
@@ -238,10 +253,6 @@ body {
     border-radius: 50%;
     border: 5px solid var(--main-bg-color);
     box-shadow: inset 0 2px 1px rgba(0, 0, 0, .3);
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-45%, 0%);
     z-index: 2;
 }
 
@@ -249,8 +260,11 @@ body {
     opacity: 0;
 }
 
-.timelineIcon.inView {
-    animation: bounceC 0.6s ease;
+@media  screen and (min-width: 769px) {
+    .timelineIcon.inView {
+        animation: bounceC 1s ease;
+    }
+    
 }
 
 .timelineIcon svg {
@@ -275,8 +289,55 @@ body {
     background-color: rgb(173, 79, 95);
 }
 
+@media screen and (min-width: 769px) {
+    #timelineContainer :nth-child(even) {
+        flex-direction: row-reverse;
+    }
+    
+    .arrow {
+        position: absolute;
+        top: 38px;
+        transform: translate(0%, -50%);
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        z-index: 3;
+    }
+    
+    .arrow::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        z-index: -1;
+        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .5))
+                drop-shadow(0 3px 10px rgba(0, 0, 0, .5));
+    }
+    
+    .arrow::after {
+        content: '';
+        position: absolute;
+        top: -20px;
+        width: 20px;
+        height: 40px;
+        background-color: var(--main-bg-color);
+        z-index: 3;
+    }
+
+    .timelineIcon {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-45%, 0%);
+    }
+}
+
 #timelineContainer :nth-child(even) {
-    flex-direction: row-reverse;
     justify-content: center;
 }
 
@@ -313,46 +374,11 @@ body {
 }
 
 #timelineContainer :nth-child(odd) .timelineEvent.inView {
-    animation: bounceA 0.6s ease;
+    animation: bounceA 1s ease;
 }
 
 #timelineContainer :nth-child(even) .timelineEvent.inView {
-    animation: bounceB 0.6s ease;
-}
-
-.arrow {
-    position: absolute;
-    top: 38px;
-    transform: translate(0%, -50%);
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    z-index: 3;
-}
-
-.arrow::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    z-index: -1;
-    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .5))
-            drop-shadow(0 3px 10px rgba(0, 0, 0, .5));
-}
-
-.arrow::after {
-    content: '';
-    position: absolute;
-    top: -20px;
-    width: 20px;
-    height: 40px;
-    background-color: var(--main-bg-color);
-    z-index: 3;
+    animation: bounceB 1s ease;
 }
 
 #timelineContainer :nth-child(odd) .timelineEvent .arrow {
@@ -396,8 +422,6 @@ body {
 }
 
 .date {
-    /* position: absolute;
-    top: 13%; */
     font-weight: bold;
     color: var(--main-text-secondary-color);
     width: 50%;
@@ -451,6 +475,8 @@ body {
 .toolsIcon {
     background: url("../assets/icons/tools.svg") no-repeat center center;
     background-size: contain;
+    width: 24px;
+    height: 24px;
 }
 
 .educationIcon {
@@ -497,3 +523,47 @@ body {
     transform-origin: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 } */
+
+@media screen and (max-width: 768px) {
+    #timelineHeader {
+        background: linear-gradient(to right, transparent 5%, var(--main-bg-color), transparent 95%);
+        margin-bottom: 80px;
+    }
+
+    #timelineHeader::before, #timelineHeader::after {
+        background: linear-gradient(to right, transparent 5%, var(--main-accent-color), transparent 95%);
+    }
+
+    #timelineFilters {
+        bottom: -100px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        justify-content: center;
+        width: 100%;
+    }
+
+    .timelineEventContainer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    .timelineEvent {
+        width: 90%;
+        margin: 0 0 20px 0;
+    }
+
+    .timelineIcon.inView {
+        animation: bounceCSmall 1s ease;
+    }
+
+    .date {
+        display: flex;
+        margin: 35px auto;
+        text-align: center;
+        justify-content: center;
+        z-index: 2;
+    }
+}

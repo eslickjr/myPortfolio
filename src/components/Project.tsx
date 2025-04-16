@@ -22,9 +22,10 @@ interface ProjectProps {
   scrollRef: boolean;
   focus: string;
   dragging: string;
+  cardDimensions: { width: number; height: number };
 }
 
-export default function Project({ projectKey, image, name, styleProps, scrollRef, focus, dragging, url }: ProjectProps) {
+export default function Project({ projectKey, image, name, styleProps, scrollRef, focus, dragging, url, cardDimensions }: ProjectProps) {
   const [hover, setHover] = useState('');
   
 
@@ -71,6 +72,8 @@ export default function Project({ projectKey, image, name, styleProps, scrollRef
   return (
     <div style={{
       position: "relative",
+      width: `${cardDimensions.width}px`,
+      height: `${cardDimensions.height}px`,
       marginLeft: (hover === 'focus' && projectKey !== 0 ? "-105px" : styleProps.marginLeft), 
       marginRight: (hover === 'focus' ? (projectKey === 0 ? "-210px" : "-105px") : styleProps.marginRight), 
       transform: `rotate3d(${styleProps.xRotation}, ${styleProps.yRotation}, ${styleProps.zRotation}, ${styleProps.degree}deg)`, 

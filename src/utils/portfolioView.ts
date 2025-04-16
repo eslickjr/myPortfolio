@@ -24,8 +24,20 @@ export class PortfolioView {
     focus: number[] = [];
     above: number[] = [];
     xPos = 0;
+    cardWidth = 250;
+    cardHeight = 200;
+    minMargin = 20;
+    maxMargin = 100;
     projectsXPos: ClassProps[] = [];
-    constructor(projects: any) {
+    constructor(projects: any, screenWidth: number, screenHeight: number) {
+        console.log("screenWidth: ", screenWidth);
+        console.log("screenHeight: ", screenHeight);
+        this.cardWidth = screenWidth * 0.112;
+        this.cardHeight = this.cardWidth * 0.8;
+        this.minMargin = this.cardWidth * 0.08;
+        this.maxMargin = this.cardWidth * 0.4;
+        this.dist = this.cardWidth + 40;
+        this.onScreen = this.dist * this.display;
         this.upperLimit = this.dist * projects.length - this.onScreen - (this.dist - 1);
 
         let cur = 0;
@@ -78,6 +90,13 @@ export class PortfolioView {
         }
     }
 
+    getCardDimensions() {
+        return {
+            width: this.cardWidth,
+            height: this.cardHeight,
+        }
+    }
+
     getProjects(): StyleProps[] {
         const styleProps: StyleProps[] = [];
 
@@ -86,7 +105,7 @@ export class PortfolioView {
                 if (i === 0) {
                     styleProps.push({ 
                         marginLeft: "0px", 
-                        marginRight: "-100px", 
+                        marginRight: `-${this.maxMargin}px`, 
                         xRotation: 0.5, 
                         yRotation: 1, 
                         zRotation: 0.5, 
@@ -95,12 +114,6 @@ export class PortfolioView {
                     });
                 } else {
                     const percent = (this.xPos - this.projectsXPos[this.beneath[i]].xPos) / (this.dist * (this.beneath.length - i));
-                    /*console.log(`percent Ben${i}: `, percent);
-                    console.log(`xpos Ben${i}: `, this.xPos);
-                    console.log(`Ben${i}: `, this.projectsXPos[this.beneath[i]].xPos);
-                    console.log(`dist Ben${i}: `, this.dist * (this.beneath.length - i));
-                    console.log(`ben i${i}: `, this.beneath[i]);
-                    console.log(`beneath length: `, this.beneath.length);*/
 
                     const indexPercent = 1 - (i / this.beneath.length);
                     const indexNextPercent = (i === this.beneath.length - 1 ? 0 : 1 - ((i + 1) / this.beneath.length));
@@ -109,18 +122,9 @@ export class PortfolioView {
                     const maxDegree = 80 * indexPercent;
                     const minDegree = 80 * indexNextPercent;
 
-                    /*console.log(`minDegree Ben${i}: `, minDegree);
-                    console.log(`maxDegree Ben${i}: `, maxDegree);*/
-
-                    if (i === this.beneath.length - 1) {
-                        //console.log(`margin Left: ${((percent * -120) + 20)}`)
-                    } else {
-                        //console.log(`margin Left: ${-100}`)
-                    }
-
                     styleProps.push({ 
-                        marginLeft: `${(i === this.beneath.length - 1 ? (percent * -120) + 20 : -100)}px`, 
-                        marginRight: `${(i === this.beneath.length - 1 ? (percent * -120) + 20 : -100)}px`,
+                        marginLeft: `${(i === this.beneath.length - 1 ? (percent * (-this.minMargin - this.maxMargin)) + this.minMargin : -this.maxMargin)}px`, 
+                        marginRight: `${(i === this.beneath.length - 1 ? (percent * (-this.minMargin - this.maxMargin)) + this.minMargin : -this.maxMargin)}px`,
                         xRotation: 0.5, 
                         yRotation: 1, 
                         zRotation: 0.5, 
@@ -132,8 +136,8 @@ export class PortfolioView {
         } else if (this.beneath.length === 1) {
             const percent = (this.xPos - this.projectsXPos[this.beneath[0]].xPos) / this.dist;
             styleProps.push({ 
-                marginLeft: `${20 * (1 - percent)}px`, 
-                marginRight: `${(percent * -120) + 20}px`, 
+                marginLeft: `${this.minMargin * (1 - percent)}px`, 
+                marginRight: `${(percent * (-this.minMargin - this.maxMargin)) + this.minMargin}px`, 
                 xRotation: 0.5, 
                 yRotation: 1, 
                 zRotation: 0.5, 
@@ -143,47 +147,16 @@ export class PortfolioView {
         }
 
         for (let i = 0; i < this.focus.length; i++) {
-            /*if (i === 0 && this.beneath.length > 0) {
-                const percent = (this.projectsXPos[this.focus[i]].xPos - this.xPos) / this.dist;
-                /*console.log(`xpos left: `, this.xPos);
-                console.log(`focus left: `, this.projectsXPos[this.focus[i]].xPos);
-                console.log("percent left: ", percent);
-
-                styleProps.push({ 
-                    marginLeft: `20px`, 
-                    marginRight: "20px", 
-                    xRotation: 0.5, 
-                    yRotation: 1, 
-                    zRotation: 0.5, 
-                    degree: 0,
-                    z: this.projectsXPos.length
-                });
-            } else if (i === this.focus.length - 1) {
-                const percent = ((this.projectsXPos[this.focus[i]].xPos) - (this.xPos + this.onScreen - this.dist)) / this.dist;
-                /*console.log(`xpos right: `, this.xPos + this.onScreen - this.dist);
-                console.log(`focus right: `, this.projectsXPos[this.focus[i]].xPos);
-                console.log("percent right: ", percent);
-                styleProps.push({ 
-                    marginLeft: "20px", 
-                    marginRight: `${(percent * -120) + 20}px`, 
-                    xRotation: 0.5, 
-                    yRotation: 1, 
-                    zRotation: 0.5, 
-                    degree: 0,
-                    z: this.projectsXPos.length
-                });
-            } else {*/
-                styleProps.push({ 
-                    marginLeft: "20px", 
-                    marginRight: "20px", 
-                    xRotation: 0.5, 
-                    yRotation: 1, 
-                    zRotation: 0.5, 
-                    degree: 0,
-                    z: this.projectsXPos.length,
-                    opacity: ''
-                });
-            //}
+            styleProps.push({ 
+                marginLeft: `${this.minMargin}px`, 
+                marginRight: `${this.minMargin}px`, 
+                xRotation: 0.5, 
+                yRotation: 1, 
+                zRotation: 0.5, 
+                degree: 0,
+                z: this.projectsXPos.length,
+                opacity: ''
+            });
         }
 
         if (this.above.length > 1) {
@@ -191,7 +164,7 @@ export class PortfolioView {
                 if (i === this.above.length - 1) {
                     styleProps.push({ 
                         marginRight: "0px", 
-                        marginLeft: "-100px", 
+                        marginLeft: `-${this.maxMargin}px`, 
                         xRotation: 0.5, 
                         yRotation: -1, 
                         zRotation: -0.5, 
@@ -201,10 +174,6 @@ export class PortfolioView {
                     });
                 } else {
                     const percent = (this.projectsXPos[this.above[i]].xPos - (this.xPos + this.onScreen)) / (this.dist * (i + 1));
-                    /*console.log(`percent above${i}: `, percent);
-                    console.log(`xpos above${i}: `, this.xPos + this.onScreen);
-                    console.log(`above${i}: `, this.projectsXPos[this.above[i]].xPos);
-                    console.log(`dist above${i}: `, this.dist * i);*/
 
                     const indexPercent = i / this.above.length;
                     const indexNextPercent = (i + 1) / this.above.length;
@@ -213,8 +182,8 @@ export class PortfolioView {
                     const maxDegree = 80 * indexNextPercent;
 
                     styleProps.push({ 
-                        marginLeft: `${( i === 0 ? (percent * -120) + 20 : -100)}px`, 
-                        marginRight: `${( i === 0 ? (percent * -120) + 20 : -100)}px`,
+                        marginLeft: `${( i === 0 ? (percent * (-this.minMargin - this.maxMargin)) + this.minMargin : -this.maxMargin)}px`, 
+                        marginRight: `${( i === 0 ? (percent * (-this.minMargin - this.maxMargin)) + this.minMargin : -this.maxMargin)}px`,
                         xRotation: 0.5, 
                         yRotation: -1, 
                         zRotation: -0.5, 
@@ -226,13 +195,10 @@ export class PortfolioView {
             }
         } else if (this.above.length === 1) {
             const percent = (this.projectsXPos[this.above[0]].xPos - (this.xPos + this.onScreen)) / this.dist;
-            /*console.log("percent above: ", percent);
-            console.log("xpos above: ", this.xPos + this.onScreen);
-            console.log("above: ", this.projectsXPos[this.above[0]].xPos);*/
 
             styleProps.push({ 
-                marginRight: `${20 * (1 - percent)}px`, 
-                marginLeft: `${(20 * (1 - percent))}px`, 
+                marginRight: `${this.minMargin * (1 - percent)}px`, 
+                marginLeft: `${(this.minMargin * (1 - percent))}px`, 
                 xRotation: 0.5, 
                 yRotation: -1, 
                 zRotation: -0.5, 

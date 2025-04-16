@@ -1,9 +1,6 @@
 .project {
     position: relative;
     flex: 0 0 auto;
-    min-width: 150px;
-    height: 200px;
-    width: 250px;
     margin: -40px;
     border-radius: 10px;
     color: var(--main-text-color);
