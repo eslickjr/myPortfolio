@@ -40,7 +40,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--main-third-color);
     height: 100%;
     width: 100%;
     position: relative;
