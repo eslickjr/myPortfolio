@@ -144,6 +144,7 @@ export default function Portfolio() {
   });
 
   const scrollRef = useRef<boolean>(false);
+  const [grabbed, setGrabbed] = useState<boolean>(false);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
   const xPos = useRef<[number | null, number | null]>([null, null]);
   const distance = useRef<number>(0);
@@ -153,9 +154,17 @@ export default function Portfolio() {
   const [dragging, setDragging] = useState<string>('');
   const [loaded, setLoaded] = useState<boolean[]>([false, false]);
   const cardDimensions = useRef<{ width: number; height: number }>({ width: 250, height: 200 });
+  const [vertical , setVertical] = useState<boolean>(false);
+
+  const screenWidth = useRef(window.innerWidth);
+  const screenHeight = useRef(window.innerHeight);
 
   useEffect(() => {
     const portfolioProjects = document.getElementById("portfolioProjects") as HTMLDivElement;
+
+    if (screenHeight.current > screenWidth.current) {
+      setVertical(true);
+    }
 
     const timeoutId = setTimeout(() => {
       setLoaded([true, false]);
@@ -167,9 +176,7 @@ export default function Portfolio() {
 
 
     if (portfolioView.current === null) {
-      const screenWidth = window.innerWidth;
-      const screenHeight = window.innerHeight;
-      portfolioView.current = new PortfolioView(projects, screenWidth, screenHeight);
+      portfolioView.current = new PortfolioView(projects, screenWidth.current, screenHeight.current);
       styleProps.current = portfolioView.current.getProjects();
       cardDimensions.current = portfolioView.current.getCardDimensions();
       setProjects(projects.map((project, i) => ({ ...project, styleProps: styleProps.current[i] })));
@@ -178,21 +185,35 @@ export default function Portfolio() {
     const handleMouseDown = (e: MouseEvent) => {
       e.preventDefault();
       scrollRef.current = true;
-      xPos.current[0] = e.clientX;
+      setGrabbed(true);
+      if (screenHeight.current > screenWidth.current) {
+        xPos.current[0] = e.clientY;
+      } else {
+        xPos.current[0] = e.clientX;
+      }
       console.log("mouse down: ", e.clientX);
     }
 
     const handleTouchStart = (e: TouchEvent) => {
       e.preventDefault();
       scrollRef.current = true;
-      xPos.current[0] = e.touches[0].clientX;
+      setGrabbed(true);
+      if (screenHeight.current > screenWidth.current) {
+        xPos.current[0] = e.touches[0].clientY;
+      } else {
+        xPos.current[0] = e.touches[0].clientX;
+      }
       console.log("touch start: ", e.touches[0].clientX);
     }
 
     const handleMouseMove = (e: MouseEvent) => {
       if (scrollRef.current) {
         xPos.current[1] = xPos.current[0];
-        xPos.current[0] = e.clientX;
+        if (screenHeight.current > screenWidth.current) {
+          xPos.current[0] = e.clientY;
+        } else {
+          xPos.current[0] = e.clientX;
+        }
 
         if (xPos.current[1] !== null) {
           distance.current = xPos.current[0] - xPos.current[1];
@@ -214,7 +235,11 @@ export default function Portfolio() {
     const handleTouchMove = (e: TouchEvent) => {
       if (scrollRef.current) {
         xPos.current[1] = xPos.current[0];
-        xPos.current[0] = e.touches[0].clientX;
+        if (screenHeight.current > screenWidth.current) {
+          xPos.current[0] = e.touches[0].clientY;
+        } else {
+          xPos.current[0] = e.touches[0].clientX;
+        }
 
         if (xPos.current[1] !== null) {
           distance.current = xPos.current[0] - xPos.current[1];
@@ -236,11 +261,30 @@ export default function Portfolio() {
     const handleMouseUp = () => {
       scrollRef.current = false;
       setIsScrolling(false);
+      setGrabbed(false);
     }
 
     const handleTouchEnd = () => {
       scrollRef.current = false;
       setIsScrolling(false);
+      setGrabbed(false);
+    }
+
+    const handleWindowResize = () => {
+      setDragging('');
+      if (portfolioView.current) {
+        screenWidth.current = window.innerWidth;
+        screenHeight.current = window.innerHeight;
+        if (screenHeight.current > screenWidth.current) {
+          setVertical(true);
+        } else {
+          setVertical(false);
+        }
+        portfolioView.current.resize(window.innerWidth, window.innerHeight);
+        styleProps.current = portfolioView.current.getProjects();
+        cardDimensions.current = portfolioView.current.getCardDimensions();
+        setProjects(projects.map((project, i) => ({ ...project, styleProps: styleProps.current[i] })));
+      }
     }
 
     portfolioProjects.addEventListener("mousedown", handleMouseDown);
@@ -252,6 +296,8 @@ export default function Portfolio() {
     window.addEventListener("mouseup", handleMouseUp);
     window.addEventListener("touchend", handleTouchEnd);
 
+    window.addEventListener("resize", handleWindowResize);
+
     return () => {
       portfolioProjects.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mousemove", handleMouseMove);
@@ -261,8 +307,6 @@ export default function Portfolio() {
       clearTimeout(timeoutId);
     }
   }, []);
-
-  console.log("cardDimensions: ", cardDimensions.current);
 
   return (
     <div id="portfolio">
@@ -296,10 +340,10 @@ export default function Portfolio() {
           <h1 id='portfolioHeader' className={loaded[0] ? "fadeIn" : ""}>Portfolio</h1>
         </div>
         <div id="portfolioProjectsWrapper">
-          <div id="portfolioProjects">
-            <div id="projectList">
+          <div id="portfolioProjects" className={grabbed ? "scrolling" : ""}>
+            <div id="projectList" className={vertical ? "projectListVertical" : "projectListHorizontal"} style={vertical ? { height: '100%', paddingBottom: '0' } : { height: `${screenWidth.current * .44 }px`, paddingBottom: `${screenWidth.current * .12 }px` }}>
               <div id="swipeContainer" className={dragging}>
-                <span id="scrollText" className={dragging}>Click and drag to scroll
+                <span id="scrollText" className={`${dragging} ${vertical ? "vertical" : ""}`}>Click and drag to scroll
                   <svg id="swipeIcon" className={dragging} xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
                     <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
@@ -310,7 +354,7 @@ export default function Portfolio() {
                 console.log("scrollRef: ", scrollRef.current);
                 
                 return (
-                <Project projectKey={i} {...project} scrollRef={isScrolling} focus={(styleProps.current[i]?.opacity ?? '')} dragging={dragging} cardDimensions={cardDimensions.current} />
+                <Project projectKey={i} {...project} scrollRef={isScrolling} focus={(styleProps.current[i]?.opacity ?? '')} dragging={dragging} cardDimensions={cardDimensions.current} vertical={vertical} />
               )})}
             </div>
           </div>

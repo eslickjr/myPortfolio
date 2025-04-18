@@ -275,3 +275,11 @@
         border-radius: 50px;
     }
 }
+
+@media screen and (max-height: 600px) {
+    #generalInfoContainer {
+        flex-direction: row;
+        align-items: center;
+        border-radius: 10px;
+    }
+}

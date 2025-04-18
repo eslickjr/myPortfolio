@@ -32,11 +32,20 @@ export class PortfolioView {
     constructor(projects: any, screenWidth: number, screenHeight: number) {
         console.log("screenWidth: ", screenWidth);
         console.log("screenHeight: ", screenHeight);
-        this.cardWidth = screenWidth * 0.112;
-        this.cardHeight = this.cardWidth * 0.8;
-        this.minMargin = this.cardWidth * 0.08;
-        this.maxMargin = this.cardWidth * 0.4;
-        this.dist = this.cardWidth + 40;
+        if (screenHeight > screenWidth) {
+            this.display = 2;
+            this.cardWidth = 70;
+            this.cardHeight = this.cardWidth * 0.8;
+            this.minMargin = this.cardHeight * 0.08;
+            this.maxMargin = this.cardHeight * 0.4;
+            this.dist = this.cardHeight + 40;
+        } else {
+            this.cardWidth = screenWidth * 0.112;
+            this.cardHeight = this.cardWidth * 0.8;
+            this.minMargin = this.cardWidth * 0.08;
+            this.maxMargin = this.cardWidth * 0.4;
+            this.dist = this.cardWidth + 40;
+        }
         this.onScreen = this.dist * this.display;
         this.upperLimit = this.dist * projects.length - this.onScreen - (this.dist - 1);
 
@@ -210,4 +219,44 @@ export class PortfolioView {
 
         return styleProps;
     }
+
+    resize(screenWidth: number, screenHeight: number) {
+        console.log("resize: ", screenWidth, screenHeight);
+        if (screenHeight > screenWidth) {
+            this.display = 2;
+            this.cardWidth = 70;
+            this.cardHeight = this.cardWidth * 0.8;
+            this.minMargin = this.cardHeight * 0.04;
+            this.maxMargin = this.cardHeight * 0.4;
+            this.dist = this.cardHeight + 40;
+        } else {
+            this.display = 4;
+            this.cardWidth = screenWidth * 0.112;
+            this.cardHeight = this.cardWidth * 0.8;
+            this.minMargin = this.cardWidth * 0.08;
+            this.maxMargin = this.cardWidth * 0.4;
+            this.dist = this.cardWidth + 40;
+        }
+        this.onScreen = this.dist * this.display;
+        this.upperLimit = this.dist * this.projectsXPos.length - this.onScreen - (this.dist - 1);
+
+        let cur = 0;
+        this.beneath = [];
+        this.focus = [];
+        this.above = [];
+        this.xPos = 0;
+        const projLength = this.projectsXPos.length;
+        this.projectsXPos = [];
+        for (let i = 0; i < projLength; i++) {
+            if (cur >= this.onScreen) {
+                this.projectsXPos.push({ xPos: cur, beneath: false, above: true });
+                this.above.push(i);
+            } else {
+                this.projectsXPos.push({ xPos: cur, beneath: false, above: false });
+                this.focus.push(i);
+            }
+            cur += this.dist;
+        }
+    }
+
 }

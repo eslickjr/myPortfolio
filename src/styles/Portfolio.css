@@ -184,6 +184,14 @@
     justify-content: left;
 }
 
+#portfolioProjects:hover {
+    cursor: grab;
+}
+
+#portfolioProjects.scrolling {
+    cursor: grabbing;
+}
+
 #projectList {
     position: relative;
     display: flex;
@@ -191,20 +199,31 @@
     flex-wrap: nowrap;
     justify-content: left;
     align-items: center;
-    height: 420px;
+    /* height: 100%; */
+    width: 100%;
+    margin: auto 0;
     overflow: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding-bottom: 80px;
+    /* padding-top: 80px; */
+    /* padding-bottom: 200px; */
+}
+
+#projectList.projectListVertical {
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 0;
+    height: 100%;
 }
 
 #projectList > *:first-child {
     margin-left: 40px;
 }
 
-#projectList > *:nth-last-child(2) {
+/* #projectList > *:nth-last-child(2) {
     margin-right: 40px;
-}
+} */
 
 #portfolio {
     padding-top: 120px;
@@ -300,10 +319,19 @@
     left: 0;
     width: 100%;
     height: 100%;
-    transform: translate(460px, 5%);
     color: darkred;
     z-index: 9999;
 }
+
+#scrollText.vertical {
+    transform: rotate(-90deg) translate(25%, 0);
+}
+/*
+@media screen and (min-width: 769px) {
+    #scrollText {
+        transform: translate(460px, 5%);
+    }
+} */
 
 .dragging {
     transition: all 1s ease;
@@ -359,5 +387,11 @@
 
     #portfolioHeaderContainer::before, #portfolioHeaderContainer::after {
         background: linear-gradient(to right, transparent 5%, var(--main-accent-color), transparent 95%);
+    }
+}
+
+@media screen and (max-height: 600px) {
+    #scrollText {
+        transform: translate(20%, 5%);
     }
 }

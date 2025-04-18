@@ -1,10 +1,9 @@
 .project {
     position: relative;
     flex: 0 0 auto;
-    margin: -40px;
+    margin: 40px -40px;
     border-radius: 10px;
     color: var(--main-text-color);
-    transform: rotate(10deg);
     transition: box-shadow .3s ease,
         margin-left .3s ease,
         margin-right .3s ease,
@@ -38,14 +37,17 @@
     z-index: 2;
 }
 
-.focus:hover {
-    box-shadow: 0 10px 15px 5px rgba(255, 255, 255, 0.8);
-    margin-left: -105px;
-    margin-right: -105px;
-    width: 500px;
-    height: 400px;
-    z-index: 3;
+.focus {
+    /* transform: scale(1.05); */
+    /* z-index: 3; */
     cursor: pointer;
+    box-shadow: 0 0 20px 0 rgba(255, 255, 255, 1);
+    transition: box-shadow .3s ease, transform .3s ease;
+}
+
+.leaving {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+    transition: box-shadow .3s ease, transform .3s ease;
 }
 
 .project::after {
@@ -99,7 +101,7 @@
     transition: text-shadow .3s ease;
 }
 
-.focus:hover .projectHeader {
+.focus .projectHeader {
     text-shadow: 0 0 5px rgba(0, 0, 0, 1);
 }
 
@@ -111,4 +113,10 @@
     height: 100px;
     margin: 5px 10px 10px 10px;
     color: var(--main-text-color);
+}
+
+@media screen and (max-width: 768px) {
+    .projectHeader {
+        font-size: 0.75rem;
+    }
 }

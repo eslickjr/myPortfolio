@@ -1,21 +1,29 @@
 #theHead {
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 100vw;
     left: 0;
-    z-index: 100;
+    z-index: 9999;
+    will-change: transform;
+    transform: translateZ(0);
     display: flex;
     flex-direction: row;
     justify-content: left;
     margin: 0;
     background: linear-gradient(to bottom, var(--main-secondary-color), transparent);
     transition: all .3s ease;
+    overflow: hidden;
+}
+
+#theHead.scrolled {
+    background: var(--main-secondary-color);
+    border-bottom: 3px solid var(--main-accent-color);
 }
 
 #theNav {
     display: flex;
     flex-direction: row;
-    margin-top: 0;
+    margin: 0 auto 0 auto;
     font-family: var(--link-font), 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 1.2rem;
@@ -73,7 +81,6 @@
 }
 
 #theHead h1 {
-    margin-left: 40px;
     color: var(--nav-header);
     margin: 10px 30px;
     font-family: var(--nav-header-font), 'Roboto', sans-serif;
@@ -84,13 +91,14 @@
 
 @media screen and (max-width: 768px) {
     #theHead {
+        position: fixed;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
+        width: 100vw;
     }
     
     #theHead h1 {
-        margin-bottom: 0;
+        text-align: center;
     }
 
     .nav-item {
