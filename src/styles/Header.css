@@ -23,7 +23,8 @@
 #theNav {
     display: flex;
     flex-direction: row;
-    margin: 0 auto 0 auto;
+    justify-content: left;
+    margin: 0 auto 0 0;
     font-family: var(--link-font), 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 1.2rem;
@@ -32,6 +33,7 @@
 #theNav ul {
     display: flex;
     flex-direction: row;
+    justify-content: left;
     list-style-type: none;
     margin: 0;
 } 
@@ -40,7 +42,6 @@
     display: block;
     position: relative;
     height: 100%;
-    position: relative;
 }
 
 .nav-link {
@@ -99,6 +100,12 @@
     
     #theHead h1 {
         text-align: center;
+    }
+
+    #theNav {
+        margin: 0 auto;
+        width: 100%;
+        justify-content: center;
     }
 
     .nav-item {

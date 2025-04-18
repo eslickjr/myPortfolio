@@ -97,7 +97,7 @@
     text-align: center;
     top: 50%;
     transform: translate(-50%, -50%);
-    text-shadow: 0 2px 4px #00000080;
+    text-shadow: 0 0 3px #00000080;
     transition: text-shadow .3s ease;
 }
 

@@ -62,56 +62,63 @@ export default function Portfolio() {
     styleProps: tempStyleProps,
     name: "Wirefront",
     description: "Run your favorite anime characters against each other.",
-    image: "/img/Shonen Showdown.png",
+    image: "/img/wirefront.png",
     url: "https://github.com/Shirishakb/WIREFRONT"
+  });
+  tempProjects.push({
+    styleProps: tempStyleProps,
+    name: "Portfolio",
+    description: "This is my portfolio you're currently on.",
+    image: "/img/portfolio.png",
+    url: "https://github.com/eslickjr/myPortfolio"
   });
   tempProjects.push({
     styleProps: tempStyleProps,
     name: "EAT.io",
     description: "Run your favorite anime characters against each other.",
-    image: "/img/Shonen Showdown.png",
+    image: "/img/eatio Landing 2.png",
     url: "https://github.com/eslickjr/Eatio"
   });
   tempProjects.push({
     styleProps: tempStyleProps,
     name: "Git Books",
     description: "Run your favorite anime characters against each other.",
-    image: "/img/Shonen Showdown.png",
+    image: "/img/gitBooks.png",
     url: "https://github.com/eslickjr/gitBooks"
   });
   tempProjects.push({
     styleProps: tempStyleProps,
     name: "Customer Care Incidents",
     description: "Run your favorite anime characters against each other.",
-    image: "/img/Shonen Showdown.png",
+    image: "/img/customerCare.png",
     url: "https://github.com/eslickjr/customerCareIncidents"
   });
   tempProjects.push({
     styleProps: tempStyleProps,
     name: "Community Kan",
     description: "Run your favorite anime characters against each other.",
-    image: "/img/Shonen Showdown.png",
+    image: "/img/Krazy Kanban Board.png",
     url: "https://github.com/eslickjr/communityKan"
   });
   tempProjects.push({
     styleProps: tempStyleProps,
     name: "Top Candidate",
     description: "Run your favorite anime characters against each other.",
-    image: "/img/Shonen Showdown.png",
+    image: "/img/githired.png",
     url: "https://github.com/eslickjr/topCandidate"
   });
   tempProjects.push({
     styleProps: tempStyleProps,
     name: "Good to Golf",
     description: "Run your favorite anime characters against each other.",
-    image: "/img/Shonen Showdown.png",
+    image: "/img/forecast.png",
     url: "https://github.com/eslickjr/goodToGolf"
   });
   tempProjects.push({
     styleProps: tempStyleProps,
     name: "Git Friends",
     description: "Run your favorite anime characters against each other.",
-    image: "/img/Shonen Showdown.png",
+    image: "/img/gitFriends.png",
     url: "https://github.com/eslickjr/gitFriends"
   });
   tempProjects.push({
@@ -125,21 +132,21 @@ export default function Portfolio() {
     styleProps: tempStyleProps,
     name: "Engine Index",
     description: "Run your favorite anime characters against each other.",
-    image: "/img/Shonen Showdown.png",
+    image: "/img/engineIndex.png",
     url: "https://github.com/eslickjr/Engine-Index"
   });
   tempProjects.push({
     styleProps: tempStyleProps,
     name: "Sportscast Forecast",
     description: "Run your favorite anime characters against each other.",
-    image: "/img/Shonen Showdown.png",
+    image: "/img/sportsCast.png",
     url: "https://github.com/eslickjr/SportscastForecast"
   });
   tempProjects.push({
     styleProps: tempStyleProps,
     name: "Big Boss",
     description: "Run your favorite anime characters against each other.",
-    image: "/img/Shonen Showdown.png",
+    image: "/img/bigBoss.png",
     url: "https://github.com/eslickjr/Big-Boss"
   });
 
