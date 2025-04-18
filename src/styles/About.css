@@ -269,7 +269,7 @@
     }
 }
 
-@media screen and (max-height: 768px) {
+@media screen and (max-height: 450px) {
     #aboutMeTitleContainer {
         background: linear-gradient(to right, transparent 5%, var(--main-bg-color), transparent 95%);
         margin-bottom: 0;
