@@ -147,7 +147,7 @@ const Timeline = () => {
                 location: "World Acceptance, Greenville, SC",
                 tools: "Selenium, SOAP U.I., SQL, Excel, CI/CD, Azure",
                 toolsIcon: "toolsIcon",
-                description: "Participate in board meetins for upcoming rollouts, assist with pragmatic developmental changes on current softwares. Off highest level of support for all applications. Assisted in restructure of support work flow. Educate service desk member to handle low level support for applications",
+                description: "Participate in board meetings for upcoming rollouts, assist with pragmatic developmental changes on current softwares. Offer highest level of support for all applications. Assisted in restructure of support work flow. Educate service desk member to handle low level support for applications",
                 date: "Apr 2024 - Present",
             },
             {
