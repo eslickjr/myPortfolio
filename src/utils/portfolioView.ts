@@ -34,7 +34,7 @@ export class PortfolioView {
         console.log("screenHeight: ", screenHeight);
         if (screenHeight > screenWidth) {
             this.display = 2;
-            this.cardWidth = 70;
+            this.cardWidth = screenHeight * 0.2;
             this.cardHeight = this.cardWidth * 0.8;
             this.minMargin = this.cardHeight * 0.08;
             this.maxMargin = this.cardHeight * 0.4;
@@ -224,7 +224,7 @@ export class PortfolioView {
         console.log("resize: ", screenWidth, screenHeight);
         if (screenHeight > screenWidth) {
             this.display = 2;
-            this.cardWidth = 70;
+            this.cardWidth = screenHeight * 0.2;
             this.cardHeight = this.cardWidth * 0.8;
             this.minMargin = this.cardHeight * 0.04;
             this.maxMargin = this.cardHeight * 0.4;

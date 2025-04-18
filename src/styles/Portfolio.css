@@ -321,10 +321,11 @@
     height: 100%;
     color: darkred;
     z-index: 9999;
+    transform: translate(20%, 5%);
 }
 
 #scrollText.vertical {
-    transform: rotate(-90deg) translate(25%, 0);
+    transform: rotate(-90deg) translate(40%, 30%);
 }
 /*
 @media screen and (min-width: 769px) {
@@ -334,7 +335,7 @@
 } */
 
 .dragging {
-    transition: all 1s ease;
+    transition: color 1s ease;
     color: transparent !important;
 }
 
@@ -345,6 +346,10 @@
 }
 
 @media screen and (max-width: 768px) {
+    #projectList > *:first-child {
+        margin-left: 0;
+    }
+
     .aboutMe {
         background: var(--main-bg-color);
     }
@@ -390,7 +395,7 @@
     }
 }
 
-@media screen and (max-height: 600px) {
+@media screen and (max-height: 450px) {
     #scrollText {
         transform: translate(20%, 5%);
     }
