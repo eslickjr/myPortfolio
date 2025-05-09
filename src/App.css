@@ -31,7 +31,8 @@ ul {
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background: var(--main-third-color);
+    /* background: var(--main-third-color); */
+    background: linear-gradient(35deg, var(--main-accent-color) 35%, black 35%, black 65%, var(--main-accent-color) 65%);
     overflow-x: hidden;
 }
 

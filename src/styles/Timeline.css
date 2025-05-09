@@ -9,6 +9,7 @@ html {
 
 body {
     background: linear-gradient(to right, var(--main-third-color) 20%, var(--main-secondary-color), var(--main-third-color) 80%);
+    /* background: linear-gradient(215deg, var(--main-third-color) 10%, black 10%, black 20%, var(--main-third-color) 20%, black); */
 }
 
 @keyframes bounceA {

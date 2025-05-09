@@ -12,6 +12,14 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
 }
 
+.project:nth-child(1) {
+    transform-origin: center;
+}
+
+.project:nth-last-child(1) {
+    transform-origin: center;
+}
+
 .project::before {
     content: '';
     position: absolute;
@@ -43,6 +51,22 @@
     cursor: pointer;
     box-shadow: 0 0 20px 0 rgba(255, 255, 255, 1);
     transition: box-shadow .3s ease, transform .3s ease;
+}
+
+.project:nth-child(1).focus {
+    transform-origin: left;
+}
+
+.project:nth-last-child(1).focus {
+    transform-origin: right;
+}
+
+.project:nth-last-child(1).leaving {
+    transform-origin: right;
+}
+
+.project:nth-child(1).leaving {
+    transform-origin: left;
 }
 
 .leaving {

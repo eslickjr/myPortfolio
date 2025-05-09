@@ -12,7 +12,7 @@
 
 .aboutMe {
     margin-bottom: 80px;
-    background: linear-gradient(to right, var(--main-bg-color) 30%, transparent 90%);
+    background: var(--main-bg-color) 65%;
     transform: translateX(-100%);
 }
 

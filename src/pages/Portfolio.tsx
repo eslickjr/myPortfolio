@@ -39,6 +39,13 @@ export default function Portfolio() {
   const tempProjects: ProjectProps[] = [];
   tempProjects.push({
     styleProps: tempStyleProps,
+    name: "Golden Grove Bicycles",
+    description: "This is a functional website for a local bicycle repair shop.",
+    image: "/img/Landing.png",
+    url: "https://github.com/eslickjr/ggBicycles"
+  })
+  tempProjects.push({
+    styleProps: tempStyleProps,
     name: "RM Spawnpoint",
     description: "This is tool to help create a professional README.",
     image: "/img/RM Spawnpoint.png",
