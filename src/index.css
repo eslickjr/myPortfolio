@@ -1,0 +1,11 @@
+/* Global scrollbar hiding — moved here from Timeline.css so it applies
+   consistently across every page rather than only when Timeline.css
+   happens to be loaded. */
+html::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}

@@ -1,36 +1,33 @@
 @keyframes imagePop {
     0% {
-        transform: scale(0.1);
-    }
-    60% {
-        transform: scale(1.1);
+        transform: scale(0.85);
+        opacity: 0;
     }
     100% {
         transform: scale(1);
+        opacity: 1;
     }
 }
 
 @keyframes paragraphBounceA {
     0% {
         transform: translateX(-200%);
-    }
-    60% {
-        transform: translateX(100px);
+        opacity: 0;
     }
     100% {
         transform: translateX(0);
+        opacity: 1;
     }
 }
 
 @keyframes paragraphBounceB {
     0% {
         transform: translateX(200%);
-    }
-    60% {
-        transform: translateX(-100px);
+        opacity: 0;
     }
     100% {
         transform: translateX(0);
+        opacity: 1;
     }
 }
 
@@ -47,51 +44,45 @@
 
 #aboutContainer {
     background-color: var(--main-bg-color);
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .5), 0 3px 10px rgba(0, 0, 0, .5);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    border: var(--card-border);
     margin-bottom: 20px;
 }
 
+/* Flat header to match the Portfolio page's title treatment */
 #aboutMeTitleContainer {
-    position: relative;
-    width: 100%;
-    background: linear-gradient(to right, transparent 30%, var(--main-bg-color), transparent 70%);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 48px;
 }
 
 #aboutMeTitle {
     position: relative;
     text-align: center;
     font-family: var(--header-font), "Roboto", sans-serif;
-    font-size: 2.5em;
+    font-weight: 600;
+    font-size: 2.75rem;
     color: var(--main-text-color);
-    width: 100%;
+    padding-bottom: 16px;
     opacity: 0;
-    transition: opacity 2s ease;
+    transition: opacity 1s ease;
 }
 
 #aboutMeTitle.fadeIn {
     opacity: 1;
-    transition: opacity 2s ease;
 }
 
-#aboutMeTitleContainer::before {
-    position: absolute;
+#aboutMeTitle::after {
     content: '';
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
-}
-
-#aboutMeTitleContainer::after {
     position: absolute;
-    content: '';
-    top: calc(100% - 3px);
-    left: 0;
-    width: 100%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
     height: 3px;
-    background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
+    border-radius: 2px;
+    background: var(--main-accent-color);
 }
 
 .stageContainer {
@@ -111,7 +102,7 @@
     position: relative;
     width: 50%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 8px;
     transition: transform 0.3s ease;
     margin: 0 auto;
 }
@@ -120,9 +111,10 @@
     width: 100%;
     height: 100%;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: var(--main-bg-color);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 3px 10px rgba(0, 0, 0, .5), inset 0 0 20px rgba(0, 0, 0, .5);
+    box-shadow: var(--card-shadow);
+    border: var(--card-border);
     transition: box-shadow 0.3s ease;
 }
 
@@ -132,7 +124,6 @@
     font-family: var(--body-font), "Roboto", sans-serif;
     line-height: 1.5;
     transition: transform 0.3s ease;
-    pointer-events: none;
 }
 
 .about :nth-child(even) {
@@ -148,11 +139,11 @@
 }
 
 .about :nth-child(even) .lifePWrapper .lifePContainer.inView {
-    animation: paragraphBounceA 1s ease forwards;
+    animation: paragraphBounceA .8s var(--ease-smooth) forwards;
 }
 
 .about :nth-child(odd) .lifePWrapper .lifePContainer.inView {
-    animation: paragraphBounceB 1s ease forwards;
+    animation: paragraphBounceB .8s var(--ease-smooth) forwards;
 }
 
 .lifePContainer.outView {
@@ -164,7 +155,7 @@
 }
 
 .lifePContainer:hover {
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5), 0 3px 20px rgba(0, 0, 0, .8), inset 0 0 20px rgba(0, 0, 0, .5);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .lifeImageContainer {
@@ -175,17 +166,16 @@
     align-items: center;
     position: relative;
     width: 45%;
-    /* filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .5), 0 3px 10px rgba(0, 0, 0, .5)); */
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 10px rgba(212, 162, 76, 0.3));
 }
 
 .lifeImageContainer.inView {
-    animation: imagePop 1s ease forwards;
+    animation: imagePop .8s var(--ease-smooth) forwards;
 }
 
 .lifeImageContainer:has(.lifeImage:hover) {
     transition: all 0.3s ease;
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 0 10px rgba(212, 162, 76, 0.5));
 }
 
 .lifeImage {
@@ -238,12 +228,7 @@
 
 @media screen and (max-width: 768px) {
     #aboutMeTitleContainer {
-        background: linear-gradient(to right, transparent 5%, var(--main-bg-color), transparent 95%);
-        margin-bottom: 0;
-    }
-
-    #aboutMeTitleContainer::after, #aboutMeTitleContainer::before {
-        background: linear-gradient(to right, transparent 5%, var(--main-accent-color), transparent 95%);
+        margin-bottom: 24px;
     }
 
     .stageContainer {
@@ -270,12 +255,7 @@
 
 @media screen and (max-height: 450px) {
     #aboutMeTitleContainer {
-        background: linear-gradient(to right, transparent 5%, var(--main-bg-color), transparent 95%);
-        margin-bottom: 0;
-    }
-
-    #aboutMeTitleContainer::after, #aboutMeTitleContainer::before {
-        background: linear-gradient(to right, transparent 5%, var(--main-accent-color), transparent 95%);
+        margin-bottom: 24px;
     }
 
     .stageContainer {

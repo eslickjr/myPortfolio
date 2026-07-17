@@ -53,21 +53,33 @@
     margin-top: 120px;
 }
 
-#generalInfoContainer {
+#generalInfoWrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-top: 20px;
+    padding: 2px;
+    background-color: var(--main-accent-color);
     border-radius: 10px;
-    background-color: var(--main-bg-color);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .5), 0 3px 10px rgba(0, 0, 0, .5);
-    
-    padding: 20px;
+    box-shadow: var(--card-shadow);
+
     opacity: 0;
     transform: translateY(-200px);
 }
 
-#generalInfoContainer.fadeIn {
+#generalInfoContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--main-bg-color);
+    border: var(--card-border);
+
+    padding: 20px;
+}
+
+#generalInfoWrapper.fadeIn {
     transition: opacity 1s linear, transform 1s ease;
     opacity: 1;
     transform: translateY(0);
@@ -80,8 +92,7 @@
     align-items: center;
     margin-right: 20px;
     position: relative;
-    /* filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .5), 0 3px 10px rgba(0, 0, 0, .5)); */
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 10px rgba(212, 162, 76, 0.3));
 }
 
 #profileImage {
@@ -94,12 +105,9 @@
     background-size: cover;
 }
 
-
-
 #generalHeader {
     color: var(--main-text-color);
     font-family: var(--header-font), "Roboto", sans-serif;
-    /*font-family: "Encode Sans Semi Condensed", "Roboto", sans-serif;*/
     font-weight: 500;
     font-size: 2rem;
     margin-bottom: 0;
@@ -109,7 +117,6 @@
 #generalTitle {
     color: var(--main-text-color);
     font-family: var(--header-font), "Roboto", sans-serif;
-    /*font-family: "Encode Sans Semi Condensed", "Roboto", sans-serif;*/
     font-weight: 300;
     font-size: 1.5rem;
     margin-top: 5px;
@@ -201,7 +208,7 @@
     align-items: center;
     background-color: var(--main-secondary-color);
     padding: 20px;
-    border-radius: 40px;
+    border-radius: 14px;
     box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
     max-width: fit-content;
     transition: all 0.3s ease;
@@ -210,22 +217,26 @@
     font-size: 1.2rem;
     letter-spacing: 0.05em;
     margin: 10px 20px;
-    color: var(--main-text-secondary-color);
+    /* Uses nav-header instead of text-secondary for stronger contrast
+       against the slate secondary-color background — same pairing
+       the site header already uses. */
+    color: var(--nav-header);
 }
 
 .hireButton svg {
     width: 32px;
     height: 32px;
     margin-right: 5px;
-    fill: var(--main-text-secondary-color);
+    fill: var(--nav-header);
     transition: all 0.3s ease;
 }
 
 .hireButton:hover {
-    /* background-color: var(--main-bg-color); */
-    /* color: var(--main-text-secondary-color); */
     transform: scale(1.1);
-    box-shadow: 6px 6px 6px rgba(255, 255, 255, 0.24), 0 1px 20px rgba(255, 255, 255, 0.48);
+    /* Was a white glow, which only reads against a dark background.
+       Swapped to an accent-gold glow so it's visible regardless of
+       the page background behind it. */
+    box-shadow: 0 8px 20px rgba(212, 162, 76, 0.35), 0 2px 8px rgba(212, 162, 76, 0.25);
 }
 
 #hirePhone {
@@ -248,13 +259,15 @@
     transform: scale(1) rotate(0deg);
 }
 
-#teaIcon:hover {
+#teaIcon.pouring {
     animation: pourTea 3s ease-in-out forwards;
 }
 
 #teaTime {
     position: absolute;
-    color: yellow;
+    /* Pure yellow had poor contrast against the light page background;
+       swapped for the accent gold so it stays visible and on-brand. */
+    color: var(--main-accent-color);
     width: 100px;
     height: 100px;
     top: 0;
@@ -269,10 +282,37 @@
 }
 
 @media screen and (max-width: 768px) {
+    #generalInfoWrapper {
+        border-radius: 50px;
+        width: 100vw;
+    }
+
     #generalInfoContainer {
         flex-direction: column;
         align-items: center;
         border-radius: 50px;
+        width: calc(100%);
+    }
+
+    #generalBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #generalDesc{
+        max-width: 100%;
+        text-align: center;
+    }
+
+    #contactHeader {
+        width: 90%;
+        text-align: center;
+    }
+
+    #teaHeader {
+        text-align: center;
+        width: 90%;
     }
 }
 

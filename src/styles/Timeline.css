@@ -1,72 +1,46 @@
-html::-webkit-scrollbar {
-    display: none;
-}
-
-html {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-}
-
-body {
-    background: linear-gradient(to right, var(--main-third-color) 20%, var(--main-secondary-color), var(--main-third-color) 80%);
-    /* background: linear-gradient(215deg, var(--main-third-color) 10%, black 10%, black 20%, var(--main-third-color) 20%, black); */
-}
-
 @keyframes bounceA {
     0% {
-        transform: translateX(-200%);
+        transform: translateX(-120%);
         opacity: 0;
-    }
-    60% {
-        transform: translateX(5%);
-        opacity: 1;
     }
     100% {
         transform: translateX(0);
+        opacity: 1;
     }
 }
 
 @keyframes bounceB {
     0% {
-        transform: translateX(200%);
+        transform: translateX(120%);
         opacity: 0;
-    }
-    60% {
-        transform: translateX(-5%);
-        opacity: 1;
     }
     100% {
         transform: translateX(0);
+        opacity: 1;
     }
 }
 
 @keyframes bounceC {
     0% {
         transform-origin: center;
-        transform: translate(-47.5% , 0%) scale(0.1);
+        transform: translate(-47.5% , 0%) scale(0.6);
         opacity: 0;
-    }
-    60% {
-        transform: translate(-47.5% , 0%) scale(1.2);
-        opacity: 1;
     }
     100% {
         transform: translate(-47.5%, 0%) scale(1);
+        opacity: 1;
     }
 }
 
 @keyframes bounceCSmall {
     0% {
         transform-origin: center;
-        transform: scale(0.1);
+        transform: scale(0.6);
         opacity: 0;
-    }
-    60% {
-        transform: scale(1.2);
-        opacity: 1;
     }
     100% {
         transform: scale(1);
+        opacity: 1;
     }
 }
 
@@ -87,30 +61,15 @@ body {
     height: 68px;
 }
 
+/* Flat header matching the Portfolio/About treatment, replacing the
+   glossy chrome banner. The flying-in clock icons on load are kept —
+   they're a nice, restrained nod to the page's subject. */
 #timelineHeader {
     margin-top: 120px;
+    margin-bottom: 48px;
     position: relative;
-    background: linear-gradient(to right, transparent 30%, var(--main-bg-color), transparent 70%);
-}
-
-#timelineHeader::before {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
-}
-
-#timelineHeader::after {
-    position: absolute;
-    content: '';
-    top: calc(100% - 3px);
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
+    display: flex;
+    justify-content: center;
 }
 
 #timelineTitle {
@@ -119,13 +78,23 @@ body {
     align-items: center;
     position: relative;
     color: var(--main-text-color);
-    font-size: 2.5em;
-    padding: 10px 10px 8px 10px;
     font-family: var(--header-font), "Roboto", sans-serif;
-    text-decoration: underline;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 3rem;
     text-align: center;
+    padding: 10px 10px 20px 10px;
+}
+
+#timelineTitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--main-accent-color);
 }
 
 #timelineTitle.notLoaded {
@@ -139,31 +108,26 @@ body {
 }
 
 #timelineTitle.notLoaded div:first-child {
-    transform: translateX(-300%)
-        rotateZ(-360deg);
-    transition: transform 1.3s ease;
+    transform: translateX(-150%);
+    transition: transform 1s var(--ease-smooth);
 }
 
 #timelineTitle.notLoaded div:last-child {
-    transform: translateX(300%)
-        rotateZ(360deg)
+    transform: translateX(150%)
         scaleX(-1);
-    transition: transform 1.3s ease;
+    transition: transform 1s var(--ease-smooth);
 }
 
 #timelineTitle.loaded div:first-child {
-    transform: translateX(0%)
-        rotateZ(0deg);
-    transition: transform 1.3s ease;
+    transform: translateX(0%);
+    transition: transform 1s var(--ease-smooth);
 }
 
 #timelineTitle.loaded div:last-child {
     transform: translateX(0%)
-        rotateZ(0deg)
         scaleX(-1);
-    transition: transform 1.3s ease;
+    transition: transform 1s var(--ease-smooth);
 }
-
 
 #timelineContainer {
     position: relative;
@@ -243,7 +207,6 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    /* align-items: center; */
     width: 100%;
     margin: 20px 0;
 }
@@ -263,9 +226,9 @@ body {
 
 @media  screen and (min-width: 769px) {
     .timelineIcon.inView {
-        animation: bounceC 1s ease;
+        animation: bounceC .7s var(--ease-smooth) forwards;
     }
-    
+
 }
 
 .timelineIcon svg {
@@ -274,27 +237,28 @@ body {
     height: 30px;
 }
 
+/* Category colors, coordinated with the main palette instead of ad-hoc hexes */
 .business {
     background-color: var(--main-text-color);
 }
 
 .family {
-    background-color: rgb(199, 129, 0);
+    background-color: var(--main-accent-color);
 }
 
 .education {
-    background-color: green;
+    background-color: #3E7C6B;
 }
 
 .start {
-    background-color: rgb(173, 79, 95);
+    background-color: #8C5468;
 }
 
 @media screen and (min-width: 769px) {
     #timelineContainer :nth-child(even) {
         flex-direction: row-reverse;
     }
-    
+
     .arrow {
         position: absolute;
         top: 38px;
@@ -303,31 +267,31 @@ body {
         height: 0;
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
-        z-index: 3;
+        z-index: 1;
     }
-    
+
     .arrow::before {
         content: '';
         position: absolute;
         top: 0;
-        left: 0;
+        left: 4px;
         width: 0;
         height: 0;
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
-        z-index: -1;
-        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .5))
-                drop-shadow(0 3px 10px rgba(0, 0, 0, .5));
+        z-index: 1;
+        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .12))
+                drop-shadow(0 3px 10px rgba(0, 0, 0, .08));
     }
-    
+
     .arrow::after {
         content: '';
         position: absolute;
-        top: -20px;
+        top: -10px;
         width: 20px;
-        height: 40px;
+        height: 20px;
         background-color: var(--main-bg-color);
-        z-index: 3;
+        z-index: 1;
     }
 
     .timelineIcon {
@@ -350,11 +314,11 @@ body {
     justify-content: left;
     align-items: center;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .5), 0 3px 10px rgba(0, 0, 0, .5);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    border: var(--card-border);
     background-color: var(--main-bg-color);
-    z-index: 1;
-    /* margin: 0 0 0 70px; */
+    z-index: 2;
 }
 
 .timelineEvent.outView {
@@ -362,16 +326,17 @@ body {
 }
 
 .timelineEvent:hover {
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .5), 0 6px 20px rgba(0, 0, 0, .5);
+    box-shadow: var(--card-shadow-hover);
     transform: scale(1.05);
     transform-origin: center;
-    /* padding: 40px;
-    margin: -20px; */
     transition: transform .2s ease, box-shadow .2s ease;
 }
 
+/* Highlights the current/most-recent role with a gold border ring,
+   using the same accent color as the rest of the site, rather than
+   a different background hue that would clash with the navy cards. */
 #timelineContainer :first-child .timelineEvent {
-    background-color: lightblue;
+    border: 2px solid var(--main-accent-color);
 }
 
 #timelineContainer :nth-child(even) .timelineEvent {
@@ -383,11 +348,11 @@ body {
 }
 
 #timelineContainer :nth-child(odd) .timelineEvent.inView {
-    animation: bounceA 1s ease;
+    animation: bounceA .8s var(--ease-smooth) forwards;
 }
 
 #timelineContainer :nth-child(even) .timelineEvent.inView {
-    animation: bounceB 1s ease;
+    animation: bounceB .8s var(--ease-smooth) forwards;
 }
 
 #timelineContainer :nth-child(odd) .timelineEvent .arrow {
@@ -400,22 +365,33 @@ body {
     border-right: 10px solid var(--main-bg-color);
 }
 
-#timelineContainer :first-child .timelineEvent .arrow {
-    border-left: 10px solid lightblue;
-}
-
 #timelineContainer :nth-child(odd) .timelineEvent .arrow::before {
     border-left: 10px solid var(--main-bg-color);
     transform: translate(-100%, -50%);
 }
 
+/* The highlighted card's arrow gets a gold outline to match its border.
+   The arrow's ::before is normally a hidden shadow-layer triangle sitting
+   behind the visible one — enlarging it slightly and recoloring it gold
+   makes it peek out as a matching ring. */
+#timelineContainer :first-child .timelineEvent .arrow::before {
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 12px solid var(--main-accent-color);
+    filter: none;
+}
+
+#timelineContainer :first-child .timelineEvent .arrow::after {
+    border-right: 2px solid var(--main-accent-color);
+}
+
+#timelineContainer :nth-child(odd) .timelineEvent .arrow::before {
+    left: 0;
+}
+
 #timelineContainer :nth-child(even) .timelineEvent .arrow::before {
     border-right: 10px solid var(--main-bg-color);
     transform: translate(0%, -50%);
-}
-
-#timelineContainer :first-child .timelineEvent .arrow::before {
-    border-left: 10px solid lightblue;
 }
 
 #timelineContainer :nth-child(odd) .timelineEvent .arrow::after {
@@ -424,10 +400,6 @@ body {
 
 #timelineContainer :nth-child(even) .timelineEvent .arrow::after {
     left: 10px;
-}
-
-#timelineContainer :first-child .timelineEvent .arrow::after {
-    background-color:lightblue;
 }
 
 .date {
@@ -528,21 +500,9 @@ body {
     background-size: contain;
 }
 
-/* .eventInformation:hover {
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .5), 0 6px 20px rgba(0, 0, 0, .5);
-    transform: scale(1.1);
-    transform-origin: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-} */
-
 @media screen and (max-width: 768px) {
     #timelineHeader {
-        background: linear-gradient(to right, transparent 5%, var(--main-bg-color), transparent 95%);
-        margin-bottom: 80px;
-    }
-
-    #timelineHeader::before, #timelineHeader::after {
-        background: linear-gradient(to right, transparent 5%, var(--main-accent-color), transparent 95%);
+        margin-bottom: 24px;
     }
 
     #timelineFilters {
@@ -573,7 +533,7 @@ body {
     }
 
     .timelineIcon.inView {
-        animation: bounceCSmall 1s ease;
+        animation: bounceCSmall .7s var(--ease-smooth) forwards;
     }
 
     .date {

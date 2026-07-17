@@ -1,23 +1,35 @@
 :root {
-    --main-bg-color: #DCE0D9;
-    --main-text-color: #0c4d6b;
-    --main-accent-color: #6B0F1A;
-    --main-third-color: #595959;
-    --main-secondary-color: #808F85;
-    --main-text-secondary-color: #97deff;
-    --main-text-third-color: #357796;
+    --main-bg-color: #1C2840;
+    --main-text-color: #F2EFE6;
+    --main-accent-color: #D4A24C;
+    --main-third-color: #9BA8B8;
+    --main-secondary-color: #232C3D;
+    --main-text-secondary-color: #A9C4D9;
+    --main-text-third-color: #8FA3C2;
 
-    --nav-header: #86d9ff;
-    --nav-link-hover: #d3ecf8;
-    --nav-link: #2b2f31;
+    --nav-header: #EDE2C8;
+    --nav-link-hover: #E8C777;
+    --nav-link: #C9D2DE;
 
-    --button-font: "Passion One";
-    --header-font: "Yanone Kaffeesatz";
-    --body-font: "Mako";
-    --link-font: "Oswald";
-    --nav-header-font: "Nanum Myeongjo";
+    --button-font: "IBM Plex Sans";
+    --header-font: "IBM Plex Sans";
+    --body-font: "Inter";
+    --link-font: "IBM Plex Sans";
+    --nav-header-font: "IBM Plex Sans";
 
-    --project-count: 15;
+    --project-count: 17;
+
+    /* Shared easing curve for entrance animations sitewide -- smooth
+       deceleration, no spring/overshoot, for a calmer motion language. */
+    --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Dark-theme card elevation. The old light-mode shadows (soft, low
+       opacity, meant to sit on a light page) are essentially invisible
+       against a dark background, so cards now get a deeper shadow plus
+       a faint light hairline border for definition instead. */
+    --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 4px 14px rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: 0 10px 24px rgba(0, 0, 0, 0.4), 0 3px 10px rgba(0, 0, 0, 0.32);
+    --card-border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 * {
@@ -30,15 +42,14 @@ ul {
 
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
-    /* background: var(--main-third-color); */
-    background: linear-gradient(35deg, var(--main-accent-color) 35%, black 35%, black 65%, var(--main-accent-color) 65%);
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, #101B2E 0%, #0B1421 100%);
     overflow-x: hidden;
 }
 
 a {
     margin: auto 10px;
-    color: black;
+    color: var(--main-text-color);
 }  
 
 

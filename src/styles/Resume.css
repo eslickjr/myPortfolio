@@ -31,7 +31,9 @@
     flex-direction: row;
     justify-content: center;
     margin-top: 60px;
+    padding-bottom: 16px;
     font-family: var(--header-font), sans-serif;
+    font-weight: 600;
     font-size: 3rem;
     color: var(--main-text-secondary-color);
     opacity: 0;
@@ -42,14 +44,17 @@
     transition: opacity 2s ease-in;
 }
 
+/* Flat centered underline, matching the Portfolio/About/Timeline header treatment */
 .skillsHeader::before {
     position: absolute;
     content: '';
-    bottom: -20px;
-    left: 0;
-    width: 100%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
     height: 3px;
-    background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
+    border-radius: 2px;
+    background: var(--main-accent-color);
 }
 
 #backendHeader {
@@ -60,9 +65,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* list-style-type: none; */
     justify-content: center;
-    margin:  20px auto;
+    margin: 20px auto;
     width: 100%;
 }
 
@@ -72,12 +76,13 @@
     justify-content: center;
     align-items: center;
     background-color: var(--main-bg-color);
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .5), 0 3px 10px rgba(0, 0, 0, .5);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    border: var(--card-border);
     padding: 20px;
     margin: 10px 10px;
-    flex: 0 1 150px; /* Allows items to grow/shrink evenly and wrap */
-    box-sizing: border-box; /* Ensures padding/margin are included in size calculations */
+    flex: 0 1 150px;
+    box-sizing: border-box;
     opacity: 0;
     transform: scale(1) translateY(-200px);
 }
@@ -89,14 +94,14 @@
 }
 
 .skillItem:hover {
-    transition: transform 0.3s ease;
+    box-shadow: var(--card-shadow-hover);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     transform: scale(1.1) translateY(0);
 }
 
 .skillHeader {
     color: var(--main-text-color);
     font-family: var(--header-font), "Roboto", sans-serif;
-    /*font-family: "Encode Sans Semi Condensed", "Roboto", sans-serif;*/
     font-weight: 500;
     font-size: 1.5rem;
     margin-bottom: 0;
@@ -105,7 +110,6 @@
 
 .skillBody {
     color: var(--main-third-color);
-    text-align: justify;
     font-family: var(--body-font), "Roboto", sans-serif;
     font-size: 1rem;
     text-align: center;

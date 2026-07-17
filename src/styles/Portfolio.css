@@ -1,15 +1,3 @@
-@keyframes portBounce {
-    0% {
-        transform: translateX(0);
-    }
-    40% {
-        transform: translateX(100px);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-
 .aboutMe {
     margin-bottom: 80px;
     background: var(--main-bg-color) 65%;
@@ -18,7 +6,7 @@
 
 .aboutMe.fadeIn {
     transform: translateX(0);
-    transition: transform .5s ease;
+    transition: transform .6s var(--ease-smooth);
 }
 
 .aboutMe::before {
@@ -49,10 +37,6 @@
 }
 
 @media screen and (min-width: 769px) {
-    .aboutMeContainer.fadeIn {
-        animation: portBounce .6s ease;
-    }
-
     .aboutMe::before, .aboutMe::after {
         background: linear-gradient(to right, var(--main-accent-color) 30%, transparent 90%);
     }
@@ -66,8 +50,7 @@
     align-items: center;
     position: relative;
     width: 45%;
-    /* filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .5), 0 3px 10px rgba(0, 0, 0, .5)); */
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
+    filter: drop-shadow(0 0 10px rgba(212, 162, 76, 0.3));
     transition: all 0.3s ease;
     margin: 0 40px 0 0;
 }
@@ -89,14 +72,13 @@
 }
 
 #portImageContainer:has(#portImage:hover) {
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1)) drop-shadow(0 0 10px rgba(196, 196, 255, 1));
+    filter: drop-shadow(0 0 10px rgba(212, 162, 76, 0.5));
     transition: all 0.3s ease;
 }
 
 #aboutMeH1 {
     color: var(--main-text-color);
     font-family: var(--header-font), "Roboto", sans-serif;
-    /*font-family: "Encode Sans Semi Condensed", "Roboto", sans-serif;*/
     font-weight: 500;
     font-size: 2rem;
     margin-bottom: 0;
@@ -126,14 +108,11 @@
     font-size: 1rem;
     letter-spacing: 0.05em;
     margin: 0 10px;
-    /* border: 1px solid var(--main-secondary-color); */
 }
 
 .portButton:hover {
     background-color: #f0f0f0;
     box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.24), 0 1px 10px rgba(0, 0, 0, 0.48);
-    /* padding: 10px;
-    margin: -5px 5px -5px 5px; */
 }
 
 #resumeLink {
@@ -165,178 +144,54 @@
     color: var(--main-accent-color);
 }
 
-#portfolioProjectsWrapper {
-    position: relative;
-    width: 100%;
-    height: auto;
-    margin: 20px auto;
-    width: 97vw;
-    border-radius: 10px;
-    overflow: clip;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 3px 10px rgba(0, 0, 0, 0.5);
-}
-
-#portfolioProjects {
-    background-color: var(--main-bg-color);
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-}
-
-#portfolioProjects:hover {
-    cursor: grab;
-}
-
-#portfolioProjects.scrolling {
-    cursor: grabbing;
-}
-
-#projectList {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: left;
-    align-items: center;
-    /* height: 100%; */
-    width: 100%;
-    margin: auto 0;
-    overflow: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: 80px;
-    /* padding-top: 80px; */
-    /* padding-bottom: 200px; */
-}
-
-#projectList.projectListVertical {
-    flex-direction: column;
-    justify-content: center;
-    padding-bottom: 0;
-    height: 100%;
-}
-
-#projectList > *:first-child {
-    margin-left: 40px;
-}
-
-/* #projectList > *:nth-last-child(2) {
-    margin-right: 40px;
-} */
-
 #portfolio {
     padding-top: 120px;
 }
 
+/* Simplified header: flat centered title with a single accent underline,
+   replacing the glossy chrome/bevel banner */
 #portfolioHeaderContainer {
-    position: relative;
-    background: linear-gradient(to right, transparent 30%, var(--main-bg-color), transparent 70%);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 48px;
 }
 
 #portfolioHeader {
-    position: relative;
     color: var(--main-text-color);
-    font-size: 2.5em;
-    padding: 10px 10px 2px 10px;
     font-family: var(--header-font), "Roboto", sans-serif;
-    font-weight: 500;
-    font-size: 3rem;
+    font-weight: 600;
+    font-size: 2.75rem;
     text-align: center;
+    position: relative;
+    padding-bottom: 16px;
     opacity: 0;
-    transition: opacity 2s ease;
+    transition: opacity 1s ease;
 }
 
 #portfolioHeader.fadeIn {
     opacity: 1;
-    transition: opacity 2s ease;
 }
 
-#portfolioHeaderContainer::before {
-    position: absolute;
+#portfolioHeader::after {
     content: '';
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
     height: 3px;
-    background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
+    border-radius: 2px;
+    background: var(--main-accent-color);
 }
 
-#portfolioHeaderContainer::after {
-    position: absolute;
-    content: '';
-    top: calc(100% - 3px);
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(to right, transparent 30%, var(--main-accent-color), transparent 70%);
-}
-
-@keyframes backgroundGlow {
-    0% {
-        filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 10px rgba(196, 0, 0, 0.8));
-    }
-    50% {
-        filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 10px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 0, 0, 0.8));
-    }
-    100% {
-        filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 10px rgba(196, 0, 0, 0.8));
-    }
-}
-
-#swipeContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    /*animation: backgroundGlow ease-in-out 3s infinite alternate;*/
-    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 10px rgba(196, 0, 0, 0.8));
-    pointer-events: none;
-}
-
-#swipeIcon {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: rotate(120deg)
-        translate(-60%, -100%);
-    clip-path: ellipse(70% 80% at top right);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: darkred;
-}
-
-#scrollText {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    color: darkred;
-    z-index: 9999;
-    transform: translate(20%, 5%);
-}
-
-#scrollText.vertical {
-    transform: rotate(-90deg) translate(40%, 30%);
-}
-/*
-@media screen and (min-width: 769px) {
-    #scrollText {
-        transform: translate(460px, 5%);
-    }
-} */
-
-.dragging {
-    transition: color 1s ease;
-    color: transparent !important;
+/* Project grid: replaces the 3D drag/tilt carousel with a legible,
+   responsive card layout */
+#projectGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 28px;
+    width: min(1400px, 94vw);
+    margin: 0 auto 100px;
 }
 
 #contactSubmit {
@@ -346,10 +201,6 @@
 }
 
 @media screen and (max-width: 768px) {
-    #projectList > *:first-child {
-        margin-left: 0;
-    }
-
     .aboutMe {
         background: var(--main-bg-color);
     }
@@ -386,17 +237,8 @@
         justify-content: center;
     }
 
-    #portfolioHeaderContainer {
-        background: linear-gradient(to right, transparent 5%, var(--main-bg-color), transparent 95%);
-    }
-
-    #portfolioHeaderContainer::before, #portfolioHeaderContainer::after {
-        background: linear-gradient(to right, transparent 5%, var(--main-accent-color), transparent 95%);
-    }
-}
-
-@media screen and (max-height: 450px) {
-    #scrollText {
-        transform: translate(20%, 5%);
+    #projectGrid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 18px;
     }
 }
