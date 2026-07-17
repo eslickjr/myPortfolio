@@ -47,7 +47,7 @@
     border-radius: 8px;
     box-shadow: var(--card-shadow);
     border: var(--card-border);
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 /* Flat header to match the Portfolio page's title treatment */
@@ -229,6 +229,7 @@
 @media screen and (max-width: 768px) {
     .about {
         padding-top: 170px;
+        padding-bottom: 40px;
     }
 
     #aboutMeTitleContainer {
