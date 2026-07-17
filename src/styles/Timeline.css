@@ -274,10 +274,10 @@
         content: '';
         position: absolute;
         top: 0;
-        left: 4px;
+        left: 0;
         width: 0;
         height: 0;
-        border-top: 10px solid transparent;
+        border-top: 10px solid;
         border-bottom: 10px solid transparent;
         z-index: 1;
         filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .12))
@@ -360,23 +360,6 @@
     border-left: 10px solid var(--main-bg-color);
 }
 
-/* The highlighted card's arrow gets a gold outline to match its border.
-   box-shadow won't work here since the arrow is a borders-only triangle
-   with no real box to shadow — drop-shadow traces the actual rendered
-   silhouette instead, so stacking a few small offset copies fakes a
-   solid outline around the triangle's edges. */
-#timelineContainer :first-child .timelineEvent .arrow {
-    filter:
-        drop-shadow(1.5px 0 0 var(--main-accent-color))
-        drop-shadow(-1.5px 0 0 var(--main-accent-color))
-        drop-shadow(0 1.5px 0 var(--main-accent-color))
-        drop-shadow(0 -1.5px 0 var(--main-accent-color))
-        drop-shadow(1.1px 1.1px 0 var(--main-accent-color))
-        drop-shadow(-1.1px 1.1px 0 var(--main-accent-color))
-        drop-shadow(1.1px -1.1px 0 var(--main-accent-color))
-        drop-shadow(-1.1px -1.1px 0 var(--main-accent-color));
-}
-
 #timelineContainer :nth-child(even) .timelineEvent .arrow {
     left: -10px;
     border-right: 10px solid var(--main-bg-color);
@@ -394,6 +377,10 @@
 
 #timelineContainer :nth-child(odd) .timelineEvent .arrow::after {
     left: -30px;
+}
+
+#timelineContainer :first-child .timelineEvent .arrow::before {
+    border-left: 10px solid var(--main-accent-color);
 }
 
 /* Extends the gold outline through the connecting patch for the
