@@ -267,7 +267,7 @@
         height: 0;
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
-        z-index: 1;
+        z-index: 3;
     }
 
     .arrow::before {
@@ -318,7 +318,7 @@
     box-shadow: var(--card-shadow);
     border: var(--card-border);
     background-color: var(--main-bg-color);
-    z-index: 2;
+    z-index: 1;
 }
 
 .timelineEvent.outView {
@@ -360,6 +360,23 @@
     border-left: 10px solid var(--main-bg-color);
 }
 
+/* The highlighted card's arrow gets a gold outline to match its border.
+   box-shadow won't work here since the arrow is a borders-only triangle
+   with no real box to shadow — drop-shadow traces the actual rendered
+   silhouette instead, so stacking a few small offset copies fakes a
+   solid outline around the triangle's edges. */
+#timelineContainer :first-child .timelineEvent .arrow {
+    filter:
+        drop-shadow(1.5px 0 0 var(--main-accent-color))
+        drop-shadow(-1.5px 0 0 var(--main-accent-color))
+        drop-shadow(0 1.5px 0 var(--main-accent-color))
+        drop-shadow(0 -1.5px 0 var(--main-accent-color))
+        drop-shadow(1.1px 1.1px 0 var(--main-accent-color))
+        drop-shadow(-1.1px 1.1px 0 var(--main-accent-color))
+        drop-shadow(1.1px -1.1px 0 var(--main-accent-color))
+        drop-shadow(-1.1px -1.1px 0 var(--main-accent-color));
+}
+
 #timelineContainer :nth-child(even) .timelineEvent .arrow {
     left: -10px;
     border-right: 10px solid var(--main-bg-color);
@@ -370,25 +387,6 @@
     transform: translate(-100%, -50%);
 }
 
-/* The highlighted card's arrow gets a gold outline to match its border.
-   The arrow's ::before is normally a hidden shadow-layer triangle sitting
-   behind the visible one — enlarging it slightly and recoloring it gold
-   makes it peek out as a matching ring. */
-#timelineContainer :first-child .timelineEvent .arrow::before {
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-left: 12px solid var(--main-accent-color);
-    filter: none;
-}
-
-#timelineContainer :first-child .timelineEvent .arrow::after {
-    border-right: 2px solid var(--main-accent-color);
-}
-
-#timelineContainer :nth-child(odd) .timelineEvent .arrow::before {
-    left: 0;
-}
-
 #timelineContainer :nth-child(even) .timelineEvent .arrow::before {
     border-right: 10px solid var(--main-bg-color);
     transform: translate(0%, -50%);
@@ -396,6 +394,12 @@
 
 #timelineContainer :nth-child(odd) .timelineEvent .arrow::after {
     left: -30px;
+}
+
+/* Extends the gold outline through the connecting patch for the
+   highlighted card only — every other card's .arrow::after is untouched. */
+#timelineContainer :first-child .timelineEvent .arrow::after {
+    border-right: 2px solid var(--main-accent-color);
 }
 
 #timelineContainer :nth-child(even) .timelineEvent .arrow::after {
@@ -502,6 +506,7 @@
 
 @media screen and (max-width: 768px) {
     #timelineHeader {
+        margin-top: 170px;
         margin-bottom: 24px;
     }
 

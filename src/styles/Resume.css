@@ -121,3 +121,9 @@
     fill: var(--main-text-secondary-color);
     filter: drop-shadow(0 0 1px #000);
 }
+
+@media screen and (max-width: 768px) {
+    #backendHeader {
+        margin-top: 170px;
+    }
+}

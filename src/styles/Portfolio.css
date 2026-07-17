@@ -187,11 +187,17 @@
 /* Project grid: replaces the 3D drag/tilt carousel with a legible,
    responsive card layout */
 #projectGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 28px;
     width: min(1400px, 94vw);
     margin: 0 auto 100px;
+}
+
+#projectGrid .project-card {
+    flex: 1 1 260px;
+    max-width: 340px;
 }
 
 #contactSubmit {
@@ -201,6 +207,10 @@
 }
 
 @media screen and (max-width: 768px) {
+    #portfolio {
+        padding-top: 170px;
+    }
+
     .aboutMe {
         background: var(--main-bg-color);
     }
@@ -238,7 +248,10 @@
     }
 
     #projectGrid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 18px;
+    }
+
+    #projectGrid .project-card {
+        flex-basis: 200px;
     }
 }

@@ -282,6 +282,10 @@
 }
 
 @media screen and (max-width: 768px) {
+    #contact {
+        margin-top: 170px;
+    }
+
     #generalInfoWrapper {
         border-radius: 50px;
         width: 100vw;
@@ -300,7 +304,7 @@
         align-items: center;
     }
 
-    #generalDesc{
+    #generalDesc {
         max-width: 100%;
         text-align: center;
     }

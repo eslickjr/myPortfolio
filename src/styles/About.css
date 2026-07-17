@@ -227,6 +227,10 @@
 }
 
 @media screen and (max-width: 768px) {
+    .about {
+        padding-top: 170px;
+    }
+
     #aboutMeTitleContainer {
         margin-bottom: 24px;
     }
