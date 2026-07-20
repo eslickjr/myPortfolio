@@ -38,8 +38,14 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 100%;
+    width: 100dvw;
+    overflow-x: hidden;
     position: relative;
+}
+
+.mx-3 {
+    width: 100dvw;
+    overflow-x: hidden;
 }
 
 #aboutContainer {
@@ -249,7 +255,7 @@
     }
 
     .lifePContainer {
-        width: 100%;
+        width: 100dvw;
         margin: 0;
     }
 
