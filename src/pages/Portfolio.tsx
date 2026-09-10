@@ -62,9 +62,9 @@ const projects: ProjectData[] = [
   },
   {
     name: "Customer Care Incidents",
-    description: "Logs customer support incidents, links them to accounts, and tracks resolution-time stats.",
-    image: "/img/customerCare.png",
-    url: "https://github.com/eslickjr/customerCareIncidents"
+    description: "Logs support incidents, links them to accounts, and tracks resolution-time stats.",
+    image: "/img/Resolv.png",
+    url: "https://github.com/eslickjr/resolv-incident-management"
   },
   {
     name: "Community Kan",
