@@ -61,7 +61,7 @@ const projects: ProjectData[] = [
     url: "https://github.com/eslickjr/gitBooks"
   },
   {
-    name: "Customer Care Incidents",
+    name: "Resolv Incident Management",
     description: "Logs support incidents, links them to accounts, and tracks resolution-time stats.",
     image: "/img/Resolv.png",
     url: "https://github.com/eslickjr/resolv-incident-management"
