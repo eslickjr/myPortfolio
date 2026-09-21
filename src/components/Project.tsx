@@ -5,9 +5,10 @@ interface ProjectProps {
   name: string;
   url: string;
   description?: string;
+  stack?: string[];
 }
 
-export default function Project({ image, name, description, url }: ProjectProps) {
+export default function Project({ image, name, description, stack, url }: ProjectProps) {
   return (
     <a
       className="project-card"
@@ -22,6 +23,15 @@ export default function Project({ image, name, description, url }: ProjectProps)
       <div className="project-card-body">
         <h3 className="project-card-title">{name}</h3>
         {description && <p className="project-card-description">{description}</p>}
+        {stack && stack.length > 0 && (
+          <div className="project-card-stack">
+            {stack.map((tech) => (
+              <span className="project-card-tag" key={tech}>
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </a>
   );
