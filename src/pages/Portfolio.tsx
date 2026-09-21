@@ -28,6 +28,20 @@ const projects: ProjectData[] = [
     url: "https://github.com/eslickjr/Eatio"
   },
   {
+    name: "Monument Builds",
+    description: "The flagship site for my web-design studio, built to show range through five switchable themes.",
+    stack: ["Angular", "Typescript"],
+    image: "/img/Monument Builds.png",
+    url: "https://github.com/eslickjr/monumentBuilds"
+  },
+  {
+    name: "Resolv Incident Management",
+    description: "Logs support incidents, links them to accounts, and tracks resolution-time stats.",
+    stack: ["React", "C#", "ASP.NET Core"],
+    image: "/img/Resolv.png",
+    url: "https://github.com/eslickjr/resolv-incident-management"
+  },
+  {
     name: "Portfolio",
     description: "The portfolio site you're currently viewing.",
     stack: ["React", "TypeScript", "Vite"],
@@ -61,13 +75,6 @@ const projects: ProjectData[] = [
     stack: ["React", "Node.js"],
     image: "/img/gitBooks.png",
     url: "https://github.com/eslickjr/gitBooks"
-  },
-  {
-    name: "Customer Care Incidents",
-    description: "Logs customer support incidents, links them to accounts, and tracks resolution-time stats.",
-    stack: ["React", "C#", "ASP.NET Core"],
-    image: "/img/customerCare.png",
-    url: "https://github.com/eslickjr/customerCareIncidents"
   },
   {
     name: "Community Kan",
